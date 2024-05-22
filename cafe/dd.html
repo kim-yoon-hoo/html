@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>겨울 카페</title>
+    <style>
+        header {
+            padding: 50px 0;
+            margin-bottom: 20px;
+            font-size: 60px;
+            text-align: center;
+            background-image: url('https://cdn.pixabay.com/photo/2016/03/26/23/23/starbucks-1281880_1280.jpg');
+            background-size: cover;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .main { 
+            display: flex; 
+            flex-direction: row;
+        }
+        .menu { 
+            flex: 1; 
+            padding-right: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        .content { 
+            flex: 5; 
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+        }
+        .side { 
+            flex: 1; 
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+        }
+        .menu a {
+            display: block;
+            background-color: gray;
+            margin-bottom: 5px;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 20px;
+            text-decoration: none;
+            color: black;
+        }
+        .menu a:hover {
+            background-color: black;
+            color: white;
+            transition: 0.3s;
+        }
+        footer {
+            background-color: aquamarine;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .content img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+        @media screen and (max-width: 480px) {
+            .main { flex-direction: column; }
+            .menu {padding-right: 0;}
+            .content img {
+                border-radius: 0%;
+            }
+        }
+        .banner {
+            width: 100%;
+            height: 200px;
+            background-image: url('https://cdn.pixabay.com/photo/2017/05/12/08/29/coffee-2306471_1280.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .banner:hover {
+            background-size: 110% 110%;
+            transition: 0.5s;
+        }
+        .special-menu-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .special-menu-buttons a {
+            display: inline-block;
+            background-color: gray;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin: 0 10px;
+            font-size: 16px;
+        }
+        .special-menu-buttons a:hover {
+            background-color: black;
+            transition: 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <header>겨울 카페</header>
+    <div class="main">
+        <div class="menu">
+            <!-- 기존 버튼 삭제 -->
+        </div>
+        <div class="content">
+            <h2>겨울 카페에 오신 것을 환영합니다!</h2>
+            <p>우리 카페는 최상의 품질과 아름다운 분위기로 여러분을 맞이합니다. 아래는 우리 카페의 몇 가지 인기 있는 메뉴와 분위기를 확인해보세요.</p>
+            <div class="banner"></div>
+            <img src="https://cdn.pixabay.com/photo/2015/02/05/01/33/valentines-day-624440_1280.jpg" alt="카페 분위기">
+            <p>우리 카페는 언제나 여러분을 환영합니다. 매일 많은 손님들이 찾는 카페로 자리잡고 있습니다. 친구들과 함께 맛있는 음료를 즐기고, 분위기 있는 공간에서 휴식을 취해보세요!</p>
+            <!-- 새로운 버튼 추가 -->
+            <div class="buttons">
+                <a href="#">우리 카페 메뉴 보기</a>
+                <a href="#">이달의 추천 메뉴</a>
+                <a href="#">이벤트 및 할인 혜택</a>
+                <a href="#">위치 및 연락처 정보</a>
+            </div>
+            <!-- 새로운 버튼 추가 -->
+            <div class="special-menu-buttons">
+                <a href="#">겨울 카페 이벤트 바로가기</a>
+                <a href="#">카페 위치 바로가기</a>
+                <a href="#">고객 문의 바로가기</a>
+                <a href="#">카페 소식 바로가기</a>
+            </div>
+        </div>
+        <div class="side">
+            <h3>오늘의 특별 메뉴</h3>
+            <img src="https://cdn.pixabay.com/photo/2024/04/11/09/04/ai-generated-8689523_1280.jpg" alt="오늘의 특별 메뉴">
+            <p>오늘의 특별 메뉴로는 향긋한 커피와 함께 제철 디저트를 즐겨보세요. 카페 내에서만 만날 수 있는 특별한 맛을 경험해보실 수 있습니다.</p>
+        </div>
+        <div class="menu-container">
+            <div class="menu">
+                <a href="viewmenu.html">메뉴 보기</a>
+                <a href=""></a>
+                <a href=""></a>
+                <a href=""></a>
+                <a href=""></a>
+                <a href=""></a> 
+                <a href=""></a>
+                <a href=""></a>
+                <a href=""></a>
+                <a href=""></a>
+            </div>
+    </div>
+    <footer>
+        &copy; 2024 김윤후 카페. 모든 권리 보유.
+    </footer>
+
+</body>
+</html>
+
