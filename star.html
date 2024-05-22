@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>별 피하기 게임</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: black;
+    }
+
+    .player {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        width: 40px;
+        height: 40px;
+        background-color: red;
+        transform: translateX(-50%);
+        transition: left 0.1s linear;
+    }
+
+    .star {
+        position: absolute;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="yellow"><polygon points="12,2 15,9 22,9 16,14 18,21 12,17 6,21 8,14 2,9 9,9"/></svg>');
+        width: 20px;
+        height: 20px;
+    }
+
+    .game-over {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 2em;
+        display: none;
+    }
+
+    .timer {
+        position: fixed;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        font-size: 1.5em;
+    }
+
+    .restart {
+        position: fixed;
+        top: 10%;
+        left: 10%;
+        color: white;
+        font-size: 2em;
+        display: none;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+<audio id="game-over-sound">
+    <source src="MP__.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+<audio id="star-collect-sound">
+    <source src="MP__(1).mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+<div class="player"></div>
+<div class="game-over">게임 오버</div>
+<div class="timer">0초</div>
+<div class="restart">다시 시작</div>
+<script>
+    const player = document.querySelector('.player');
+    const timerElement = document.querySelector('.timer');
+    const gameOverElement = document.querySelector('.game-over');
+    const restartElement = document.querySelector('.restart');
+    let playerX = window.innerWidth / 2;
+    const playerSpeed = 10;
+    let gameInterval;
+    let starCreationInterval;
+    let timeElapsed = 0;
+    let starSpeedMultiplier = 1;
+    let isGameEnded = false;
+
+    function createStar() {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        const startX = Math.random() * (window.innerWidth - 20); // 랜덤한 시작 가로 위치
+        star.style.left = `${startX}px`;
+        star.style.top = '-10px'; // 맨 위에서 시작
+        
+        // 별의 크기를 랜덤하게 설정
+        const starSize = Math.random() * 20 + 10; // 10px ~ 30px 사이의 크기
+        star.style.width = `${starSize}px`;
+        star.style.height = `${starSize}px`;
+        
+        document.body.appendChild(star);
+
+        let duration = Math.random() * 5 + 2; // 랜덤한 속도로 떨어지도록 설정 (2에서 7 사이의 값)
+        duration /= starSpeedMultiplier; // 속도 증가
+
+        setTimeout(() => {
+            star.style.top = '110vh'; // 아래로 이동
+            star.style.transition = `top ${duration}s linear`; // 선형 이동 애니메이션 적용
+        }, 100); // setTimeout을 사용하여 즉시 애니메이션 시작
+
+        star.addEventListener('transitionend', () => {
+            document.body.removeChild(star); // 애니메이션이 끝나면 별 제거
+        });
+
+        const checkCollision = setInterval(() => {
+            if (isGameEnded) {
+                clearInterval(checkCollision);
+                return;
+            }
+            const starRect = star.getBoundingClientRect();
+            const playerRect = player.getBoundingClientRect();
+            if (starRect.top < playerRect.bottom && starRect.bottom > playerRect.top && starRect.left < playerRect.right && starRect.right > playerRect.left) {
+                endGame();
+                clearInterval(checkCollision);
+            }
+        }, 100);
+    }
+
+    starCreationInterval = setInterval(createStar, 100); // 별을 더 자주 생성 (0.1초마다)
+
+    document.addEventListener('keydown', (event) => {
+        if (isGameEnded) return; // 게임 종료 시 플레이어 움직임 막음
+        if (event.key === 'ArrowLeft') {
+            playerX -= playerSpeed;
+        } else if (event.key === 'ArrowRight') {
+            playerX += playerSpeed;
+        }
+        player.style.left = `${playerX}px`;
+    });
+
+    const timerInterval = setInterval(() => {
+        timeElapsed += 1;
+        if (!isGameEnded) { // 게임이 종료되지 않았을 때에만 시간 증가
+            if (timeElapsed % 100 === 0) { // 100초 단위로 효과음 재생
+                playSound("star-collect-sound");
+            }
+            if (timeElapsed >= 50 && timeElapsed % 50 === 0) { // 50초 단위로 별의 속도가 증가하도록 설정
+                starSpeedMultiplier += 0.05; // 50초마다 별 속도 증가
+            }
+            timerElement.textContent = `${timeElapsed}초`;
+        }
+    }, 1000);
+
+    function endGame() {
+        isGameEnded = true;
+        clearInterval(gameInterval);
+        clearInterval(starCreationInterval);
+        clearInterval(timerInterval);
+        gameOverElement.style.display = 'block';
+        restartElement.style.display = 'block';
+        playSound("game-over-sound");
+    }
+
+    restartElement.addEventListener('click', () => {
+        location.reload(); // 페이지 새로고침하여 게임 재시작
+    });
+
+    let keysPressed = {};
+    document.addEventListener('keydown', (event) => {
+        keysPressed[event.key] = true;
+    });
+
+    document.addEventListener('keyup', (event) => {
+        keysPressed[event.key] = false;
+    });
+
+    function movePlayer() {
+        if (keysPressed['ArrowLeft']) {
+            playerX -= playerSpeed;
+        }
+        if (keysPressed['ArrowRight']) {
+            playerX += playerSpeed;
+        }
+        player.style.left = `${playerX}px`;
+        if (!isGameEnded) {
+            requestAnimationFrame(movePlayer); // 부드러운 이동을 위해 requestAnimationFrame 사용
+        }
+    }
+
+    movePlayer(); // 플레이어 이동 함수 호출
+
+    function playSound(soundId) {
+        const sound = document.getElementById(soundId);
+        sound.play();
+    }
+</script>
+</body>
+</html>
