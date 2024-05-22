@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>홀짝 게임</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+
+    h1 {
+        color: #333;
+    }
+
+    button {
+        margin: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    #result {
+        margin-top: 20px;
+        font-size: 18px;
+        color: #008000;
+    }
+
+    .character {
+        margin-top: 20px;
+        font-size: 40px;
+    }
+
+    .speech-bubble {
+        position: relative;
+        display: inline-block;
+        background-color: #f7f7f7;
+        padding: 10px;
+        border-radius: 10px;
+        margin-top: 20px;
+        font-size: 16px;
+        color: #000;
+    }
+
+    .speech-bubble::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border: 10px solid transparent;
+        border-top-color: #f7f7f7;
+        border-bottom: 0;
+        margin-left: -10px;
+    }
+</style>
+</head>
+<body>
+<h1>홀짝 게임</h1>
+<div class="speech-bubble" id="computerMessage">컴퓨터가 선택한 숫자: <span id="computerNumber"></span></div>
+<div class="speech-bubble" id="playerMessage">당신은: </div>
+<button id="oddBtn">홀</button>
+<button id="evenBtn">짝</button>
+<div id="result"></div>
+<div class="speech-bubble" id="character">😊</div>
+
+<script>
+    const oddBtn = document.getElementById('oddBtn');
+    const evenBtn = document.getElementById('evenBtn');
+    const resultDisplay = document.getElementById('result');
+    const characterDisplay = document.getElementById('character');
+    const computerMessageDisplay = document.getElementById('computerMessage');
+    const computerNumberDisplay = document.getElementById('computerNumber');
+    const playerMessageDisplay = document.getElementById('playerMessage');
+    let consecutiveWins = 0;
+
+    function getRandomMessage(isEven) {
+        const messages = [
+            isEven ? '나는 짝수야.' : '나는 홀수야.',
+            isEven ? '나는 홀수야.' : '나는 짝수야.'
+        ];
+        return messages[Math.floor(Math.random() * messages.length)];
+    }
+
+    function playGame(choice) {
+        const computerNumber = Math.floor(Math.random() * 10) + 1; // 1부터 10 사이의 난수 생성
+        const isEven = computerNumber % 2 === 0;
+        const computerMessage = getRandomMessage(isEven);
+        const playerMessage = choice === 'odd' ? '당신은: 홀' : '당신은: 짝';
+
+        playerMessageDisplay.textContent = playerMessage;
+        computerNumberDisplay.textContent = computerNumber; // 컴퓨터가 선택한 숫자 표시
+        characterDisplay.textContent = computerMessage;
+
+        const isLie = (isEven && choice === 'odd') || (!isEven && choice === 'even');
+        const message = isLie ? '진실' : '거짓';
+        
+        let i = " "
+        let resultText = `${i}`;
+
+        if (isLie) {
+            resultText += `나는 ${message}이야.`;
+            consecutiveWins = 0; // 틀릴 경우 연속 이긴 횟수 초기화
+        } else {
+            resultText += `나는 ${message}이야.`;
+            consecutiveWins++; // 연속 이긴 횟수 증가
+            if (consecutiveWins >= 3) {
+                resultText += `<br>연속 ${consecutiveWins}회 맞춤!`; // 3회 이상 연속 이긴 경우 메시지 추가
+            }
+        }
+
+        resultDisplay.innerHTML = resultText;
+    }
+
+    oddBtn.addEventListener('click', () => playGame('odd'));
+    evenBtn.addEventListener('click', () => playGame('even'));
+
+    // 초기 게임 시작 시 컴퓨터가 먼저 선택한 숫자 표시
+    playGame('odd'); // 임의로 선택한 'odd'로 시작하거나, 아래의 코드로 무작위로 시작할 수 있습니다.
+    // const startingChoice = Math.random() < 0.5 ? 'odd' : 'even';
+    // playGame(startingChoice);
+</script>
+</body>
+</html>

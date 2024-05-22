@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>JSON API</title>
+	<style>
+		#posts div {
+			background-color: #eee;
+			margin: 5px 0;
+			border: 1px solid #aaa;
+			border-radius: 15px;
+			padding: 15px;
+		}
+	</style>
+</head>
+<body>
+	<div id="posts"></div>
+	<script>
+		const url = "https://jsonplaceholder.typicode.com/posts"
+		const getPost = () => {
+			fetch(url)
+				.then( response => response.json() )
+				.then( posts => showPost(posts) )
+		}
+		const showPost = (posts) => {
+			posts.forEach( post => {
+				let box = `
+					<div>
+						<h2>#${post.id} ${post.title}</h2>
+						<p>${post.body}</p>
+						<p>userId : ${post.userId}</p>
+					</div>
+				`
+				document.querySelector("#posts").innerHTML += box
+			} )
+		}
+		getPost()
+	</script>
+</body>
+</html>

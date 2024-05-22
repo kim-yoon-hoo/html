@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>마이홈</title>
+	<style>
+		header {
+			padding: 50px 0;
+			margin-bottom: 20px;
+			font-size: 60px;
+			text-align: center;
+			/* background-color: cadetblue; */
+			background-image: url('https://img.khan.co.kr/news/2023/03/30/l_2023033101001318700113151.webp');
+			background-size: cover;
+		}
+		.main { 
+			display: flex; 
+			flex-direction: row;
+		}
+		.menu { 
+			flex: 1; 
+			padding-right: 10px;
+		}
+		.content { flex: 5; }
+		.side { flex: 1; }
+		.menu a {
+			display: block;
+			background-color: gray;
+			margin-bottom: 5px;
+			padding: 10px 0;
+			text-align: center;
+			font-size: 20px;
+			text-decoration: none;
+			color: black;
+		}
+		.menu a:hover {
+			background-color: black;
+			color: white;
+			transition: 0.3s;
+		}
+		footer {
+			background-color: aquamarine;
+			text-align: center;
+			padding: 20px;
+		}
+		.content img {
+			width: 200px;
+			height: 200px;
+			border-radius: 50%;
+		}
+		.content img:hover {
+			animation: photoani 0.5s infinite;
+		}
+		@keyframes photoani {
+			from { transform: rotate(0deg); }
+			to { transform: rotate(360deg); }
+		}
+		@media screen and (max-width: 480px) {
+			.main { flex-direction: column; }
+			.menu {padding-right: 0;}
+			.content img {
+				width: 100%;
+				border-radius: 0%;
+			}
+			.content img:hover {
+				animation: none;
+			}
+			footer {
+				margin-top: 10px;
+			}
+		}
+        .banner {
+            width: 100%;
+            height: 200px;
+            background-image: url(https://img.khan.co.kr/news/2023/03/30/l_2023033101001318700113151.webp);
+            background-size: 100% 100%;
+            background-position: center;
+        }
+        .banner:hover {
+            background-size: 150% 150%;
+            transition: 0.5s;
+        }
+	</style>
+</head>
+<body>
+	<header>MY HOME</header>
+	<div class="main">
+		<div class="menu">
+			<a href="#">메뉴1</a>
+			<a href="#">메뉴2</a>
+			<a href="#">메뉴3</a>
+			<a href="#">메뉴4</a>
+			<a href="#">메뉴5</a>
+		</div>
+		<div class="content">
+			<h3>마이홈에 오신 것을 환영합니다.</h3>
+			<p>
+				<img src="https://img.khan.co.kr/news/2023/03/30/l_2023033101001318700113151.webp" alt="그림1">
+				<img src="https://previews.123rf.com/images/tea/tea1706/tea170600915/81091599-%EC%9D%B8%EC%B2%9C-%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD-2017-%EB%85%84-5-%EC%9B%94-%EC%9D%B8%EC%B2%9C-%EA%B5%AD%EC%A0%9C-%EA%B3%B5%ED%95%AD-%EB%82%B4%EB%B6%80.jpg" alt="그림2">
+				<img src="https://cdn.localnewsroom.co.kr/news/photo/202305/2251_2507_4027.jpg" alt="그림3">
+			</p>
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio vitae consectetur recusandae ad nesciunt odit eum laboriosam atque, vero maiores reprehenderit mollitia asperiores labore autem omnis corporis ea ipsum? Sunt.</p>
+		</div>
+		<div class="side">
+            <div class="banner"></div>
+			Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ut aut vitae, ipsum minima nihil nobis unde nemo labore. Molestias vel accusantium praesentium molestiae earum provident vero magni ex reiciendis sed?
+		</div>
+	</div>
+	<footer>
+		&copy; 2024 홍길동 All rights reserved.
+	</footer>
+</body>
+</html>

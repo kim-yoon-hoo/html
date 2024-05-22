@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>마이웹 1</title>
+	<style>
+		body {
+			background-color: brown;
+			color: white;
+		}
+		h1 {
+			/* color: yellow; */
+		}
+	</style>
+</head>
+<body>
+	<button onclick="bg('white','black')">흰색</button>
+	<button onclick="bg('red','white')">빨강</button>
+	<button onclick="bg('blue','white')">파랑</button>
+	<button onclick="bg('green','yellow')">녹색</button>
+	<button onclick="bg('purple','black')">보라</button>
+	<button onclick="bg('pink','red')">분홍</button>
+	<h1>안녕하세요!</h1>
+	<script>
+		//Arrow 함수
+		const bg = (b,c) => {
+			document.body.style.backgroundColor = b
+			document.body.style.color = c
+		}
+
+		//고전적인 함수
+		function bg2(c) {
+			document.body.style.backgroundColor = c
+		}
+	</script>
+</body>
+</html>
