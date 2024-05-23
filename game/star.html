@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>별 피하기 게임</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: black;
+    }
+
+    .player {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        width: 40px;
+        height: 40px;
+        background-color: red;
+        transform: translateX(-50%);
+        transition: left 0.1s linear;
+        display: none;
+    }
+
+    .star {
+        position: absolute;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="yellow"><polygon points="12,2 15,9 22,9 16,14 18,21 12,17 6,21 8,14 2,9 9,9"/></svg>');
+        width: 20px;
+        height: 20px;
+        transition: top 1s, left 1s;
+    }
+
+    .blackhole {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 4em;
+        display: none;
+    }
+
+    .game-over {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 2em;
+        display: none;
+    }
+
+    .timer {
+        position: fixed;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        font-size: 1.5em;
+        display: none;
+    }
+
+    .restart {
+        position: fixed;
+        top: 10%;
+        left: 10%;
+        color: white;
+        font-size: 2em;
+        display: none;
+        cursor: pointer;
+    }
+
+    .start {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 2em;
+        cursor: pointer;
+    }
+
+    .shop {
+        position: fixed;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        color: white;
+        font-size: 1.5em;
+        display: none;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .shop-item {
+        margin: 10px;
+        cursor: pointer;
+    }
+
+    .shop-button {
+        position: fixed;
+        top: 10%;
+        right: 10%;
+        color: white;
+        font-size: 1.5em;
+        cursor: pointer;
+    }
+
+    .close-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+    }
+
+    .score {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        color: white;
+        font-size: 1.5em;
+        display: none;
+    }
+
+    .alert {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        display: none;
+    }
+
+    .last-time {
+        position: fixed;
+        top: 50px;
+        right: 10px;
+        color: white;
+        font-size: 1.5em;
+        display: none;
+    }
+</style>
+</head>
+<body>
+<audio id="game-over-sound">
+    <source src="MP__.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+<audio id="star-collect-sound">
+    <source src="MP_Winning_Triumphal_Fanfare.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+<audio id="purchase-sound">
+    <source src="MP__ (2).mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+<div class="player"></div>
+<div class="blackhole">@</div>
+<div class="game-over">게임 오버</div>
+<div class="timer">0초</div>
+<div class="restart">다시 시작</div>
+<div class="start">게임 시작</div>
+<div class="shop">
+    <div class="close-button">X</div>
+    <div>상점</div>
+    <div class="shop-item" data-type="skill" data-value="small" data-cost="10">작아짐! (10초)</div>
+    <div class="shop-item" data-type="skill" data-value="time-freeze" data-cost="1">시간 멈춤 (50초)</div>
+    <div class="shop-item" data-type="skill" data-value="blackhole" data-cost="40">블랙홀 (40초)</div>
+    <div class="shop-item" data-type="skill" data-value="invisible" data-cost="20">투명화 (20초)</div>
+</div>
+<div class="shop-button">상점 열기</div>
+<div class="score">내 점수: <span id="score">0</span></div>
+<div class="alert"></div>
+<div class="last-time">지난 시간: <span id="last-time">0초</span></div>
+<script>
+    const player = document.querySelector('.player');
+    const timerElement = document.querySelector('.timer');
+    const gameOverElement = document.querySelector('.game-over');
+    const restartElement = document.querySelector('.restart');
+    const startElement = document.querySelector('.start');
+    const shopElement = document.querySelector('.shop');
+    const shopButton = document.querySelector('.shop-button');
+    const closeButton = document.querySelector('.close-button');
+    const scoreElement = document.getElementById('score');
+    const alertElement = document.querySelector('.alert');
+    const lastTimeElement = document.getElementById('last-time');
+    const lastTimeContainer = document.querySelector('.last-time');
+    const blackholeElement = document.querySelector('.blackhole');
+    const purchaseSound = document.getElementById('purchase-sound');
+    let playerX = window.innerWidth / 2;
+    const playerSpeed = 10;
+    let gameInterval;
+    let starCreationInterval;
+    let timeElapsed = 0;
+    let starSpeedMultiplier = 1;
+    let isGameEnded = false;
+    let score = 0;
+    const playerWidth = 40;
+    let stars = [];
+    let lastTimeElapsed = 0;
+    let hasBlackhole = false;
+    let hasInvisible = false;
+    let isInvincible = false;
+    let hasSmall = false;
+    let hasTimeFreeze = false;
+
+    function createStar() {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        const startX = Math.random() * (window.innerWidth - 20);
+        star.style.left = `${startX}px`;
+        star.style.top = '-10px';
+
+        const starSize = Math.random() * 20 + 10;
+        star.style.width = `${starSize}px`;
+        star.style.height = `${starSize}px`;
+
+        document.body.appendChild(star);
+        stars.push(star);
+
+        let duration = Math.random() * 5 + 2;
+        duration /= starSpeedMultiplier;
+
+        setTimeout(() => {
+            star.style.top = '110vh';
+            star.style.transition = `top ${duration}s linear`;
+        }, 100);
+
+        star.addEventListener('transitionend', () => {
+            document.body.removeChild(star);
+            stars = stars.filter(s => s !== star);
+        });
+    }
+
+    function startGame() {
+        player.style.display = 'block';
+        timerElement.style.display = 'block';
+        startElement.style.display = 'none';
+        shopButton.style.display = 'none';
+        isGameEnded = false;
+
+        starCreationInterval = setInterval(createStar, 100);
+
+        const timerInterval = setInterval(() => {
+            if (isGameEnded) {
+                clearInterval(timerInterval);
+                return;
+            }
+            timeElapsed += 1;
+            if (!isGameEnded) {
+                if (timeElapsed % 100 === 0) {
+                    playSound("star-collect-sound");
+                }
+                if (timeElapsed >= 50 && timeElapsed % 50 === 0) {
+                    starSpeedMultiplier += 0.05;
+                }
+                timerElement.textContent = `${timeElapsed}초`;
+            }
+        }, 1000);
+
+        document.addEventListener('keydown', (event) => {
+            if (isGameEnded) return;
+            if (event.key === 'ArrowLeft') {
+                playerX -= playerSpeed;
+            } else if (event.key === 'ArrowRight') {
+                playerX += playerSpeed;
+            } else if (event.key === 'q' && hasBlackhole) {
+                activateBlackhole();
+            } else if (event.key === 'e' && hasInvisible) {
+                activateInvisible();
+            } else if (event.key === 'w' && hasSmall) {
+                activateSmall();
+            } else if (event.key === 'r' && hasTimeFreeze) {
+                activateTimeFreeze();
+            }
+
+            if (playerX < 0) {
+                playerX = 0;
+            } else if (playerX > window.innerWidth - playerWidth) {
+                playerX = window.innerWidth - playerWidth;
+            }
+            player.style.left = `${playerX}px`;
+        });
+
+        movePlayer();
+        checkCollision();
+    }
+
+    function endGame() {
+        isGameEnded = true;
+        clearInterval(starCreationInterval);
+        gameOverElement.style.display = 'block';
+        restartElement.style.display = 'block';
+        playSound("game-over-sound");
+        lastTimeElapsed = timeElapsed;
+        lastTimeElement.textContent = `${lastTimeElapsed}초`;
+        lastTimeContainer.style.display = 'block';
+    }
+
+    restartElement.addEventListener('click', () => {
+        init();
+    });
+
+    startElement.addEventListener('click', startGame);
+
+    shopButton.addEventListener('click', () => {
+        shopElement.style.display = 'block';
+    });
+
+    closeButton.addEventListener('click', () => {
+        shopElement.style.display = 'none';
+    });
+
+    let keysPressed = {};
+    document.addEventListener('keydown', (event) => {
+        keysPressed[event.key] = true;
+    });
+
+    document.addEventListener('keyup', (event) => {
+        keysPressed[event.key] = false;
+    });
+
+    function movePlayer() {
+        if (keysPressed['ArrowLeft']) {
+            playerX -= playerSpeed;
+        }
+        if (keysPressed['ArrowRight']) {
+            playerX += playerSpeed;
+        }
+
+        if (playerX < 0) {
+            playerX = 0;
+        } else if (playerX > window.innerWidth - playerWidth) {
+            playerX = window.innerWidth - playerWidth;
+        }
+        player.style.left = `${playerX}px`;
+
+        if (!isGameEnded) {
+            requestAnimationFrame(movePlayer);
+        }
+    }
+
+    function checkCollision() {
+        if (isGameEnded) return;
+        stars.forEach(star => {
+            const starRect = star.getBoundingClientRect();
+            const playerRect = player.getBoundingClientRect();
+            if (!isInvincible && starRect.top < playerRect.bottom && starRect.bottom > playerRect.top && starRect.left < playerRect.right && starRect.right > playerRect.left) {
+                endGame();
+            }
+        });
+        requestAnimationFrame(checkCollision);
+    }
+
+    function playSound(soundId) {
+        const sound = document.getElementById(soundId);
+        sound.play();
+    }
+
+    function activateBlackhole() {
+        hasBlackhole = false;
+        blackholeElement.style.display = 'block';
+        const blackholeInterval = setInterval(() => {
+            stars.forEach(star => {
+                const starRect = star.getBoundingClientRect();
+                const blackholeRect = blackholeElement.getBoundingClientRect();
+                if (
+                    starRect.top < blackholeRect.bottom &&
+                    starRect.bottom > blackholeRect.top &&
+                    starRect.left < blackholeRect.right &&
+                    starRect.right > blackholeRect.left
+                ) {
+                    document.body.removeChild(star);
+                    stars = stars.filter(s => s !== star);
+                } else {
+                    star.style.left = `${blackholeRect.left + blackholeRect.width / 2}px`;
+                    star.style.top = `${blackholeRect.top + blackholeRect.height / 2}px`;
+                }
+            });
+        }, 100);
+
+        setTimeout(() => {
+            clearInterval(blackholeInterval);
+            blackholeElement.style.display = 'none';
+            stars.forEach(star => {
+                star.style.transition = `top 1s, left 1s`;
+            });
+        }, 4000);
+    }
+
+    function activateInvisible() {
+        hasInvisible = false;
+        isInvincible = true;
+        player.style.opacity = '0.5';
+        setTimeout(() => {
+            isInvincible = false;
+            player.style.opacity = '1';
+        }, 3000);
+    }
+
+    function activateSmall() {
+        hasSmall = false;
+        player.style.width = '20px';
+        player.style.height = '20px';
+        setTimeout(() => {
+            player.style.width = '40px';
+            player.style.height = '40px';
+        }, 4000);
+    }
+
+    function activateTimeFreeze() {
+        hasTimeFreeze = false;
+        clearInterval(starCreationInterval);
+        stars.forEach(star => {
+            star.style.transition = 'none';
+        });
+        setTimeout(() => {
+            stars.forEach(star => {
+                star.style.transition = 'top 1s, left 1s';
+            });
+            starCreationInterval = setInterval(createStar, 100);
+        }, 6000); // 시간 멈춤 6초
+    }
+
+    // 상점 아이템 구매 기능
+    const shopItems = document.querySelectorAll('.shop-item');
+    shopItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const itemType = item.getAttribute('data-type');
+            const itemValue = item.getAttribute('data-value');
+            const itemCost = parseInt(item.getAttribute('data-cost'));
+
+            if (lastTimeElapsed >= itemCost) {
+                alertElement.textContent = `구매 성공: ${item.textContent}`;
+                alertElement.style.color = 'green';
+                lastTimeElapsed -= itemCost;
+                lastTimeElement.textContent = `${lastTimeElapsed}초`;
+                playSound('purchase-sound');
+
+                if (itemType === 'skill') {
+                    if (itemValue === 'blackhole') {
+                        hasBlackhole = true;
+                    } else if (itemValue === 'invisible') {
+                        hasInvisible = true;
+                    } else if (itemValue === 'small') {
+                        hasSmall = true;
+                    } else if (itemValue === 'time-freeze') {
+                        hasTimeFreeze = true;
+                    }
+                }
+            } else {
+                alertElement.textContent = '시간이 부족합니다.';
+                alertElement.style.color = 'red';
+            }
+
+            alertElement.style.display = 'block';
+
+            setTimeout(() => {
+                alertElement.style.display = 'none';
+            }, 2000);
+        });
+    });
+
+    // 초기화
+    function init() {
+        playerX = window.innerWidth / 2;
+        timeElapsed = 0;
+        starSpeedMultiplier = 1;
+        stars.forEach(star => document.body.removeChild(star));
+        stars = [];
+        clearInterval(starCreationInterval);
+        timerElement.textContent = '0초';
+        gameOverElement.style.display = 'none';
+        restartElement.style.display = 'none';
+        shopButton.style.display = 'block';
+        shopElement.style.display = 'none';
+        player.style.display = 'none';
+        startElement.style.display = 'block';
+        blackholeElement.style.display = 'none';
+        hasBlackhole = false;
+        hasInvisible = false;
+        hasSmall = false;
+        hasTimeFreeze = false;
+        isInvincible = false;
+    }
+
+    init();
+</script>
+</body>
+</html>
