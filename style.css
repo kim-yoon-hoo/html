@@ -3,71 +3,64 @@
 * {
     margin: 0 auto;
     padding: 0;
-    text-decoration: none;
-    list-style: none;
-    /* background-color: #333333; */
-}
-a {
-    display: block;
-}
-#wrap {
-    width: 1200px;
 }
 
-/* header */
-header {
-    display: flex;
+.living-room {
     width: 1200px;
-    height: 100px;
+    height: 560px;
+    position: relative;
 }
-.logo {
-    margin: 0;
-    width: 200px;
-    height: 100px;
-    background-color: #111;
+.veranda {
+    width: 100%;
+    height: 160px;
+    background-color: blue;
+    position: absolute;
+    top: 0;
 }
-nav {
-    margin: 0;
-    width: 600px;
-    height: 40px;
-    background-color: #222;
-}
-
-/* section */
-#visual {
-    width: 1200px;
-    height: 300px;
-    background-color: #333;
-}
-#contents {
-    display: flex;
-    width: 1200px;
+.main-room {
+    width: 23%;
     height: 200px;
+    background-color: gray;
+    position: absolute;
+    top: 160px;
 }
-article {
-        width: 400px;
-        height: 200px;
-        background-color: #444;
+.kitchen {
+     width: 20%;
+     height: 200px;
+     background-color: green;
+     position: absolute;
+     top: 360px;
 }
-
-/* footer */
-footer {
-    display: flex;
-    width: 1200px;
-    height: 100px;
+.gate {
+    width: 16%;
+    height: 80px;
+    background-color: yellow;
+    position: absolute;
+    top: 480PX;
+    left: 600px;
+    transform: translate(-50%);
 }
-.bt-logo {
-    width: 200px;
-    height: 100px;
-    background-color: #555;
+.room1 {
+    width:  21%;
+    height: 160px;
+    background-color: rgba(128, 128, 128, 0.595);
+    position: absolute;
+    right: 0;
+    top: 160px;
 }
-.copy {
-    width: 800px;
-    height: 100px;
-    background-color: #666;
+.washroom {
+    width: 14%;
+    height: 220px;
+    background-color: red;
+    position: absolute;
+    top: 319px;
+    right: 0;
 }
-.sns {
-    width: 200px;
-    height: 100px;
-    background-color: #777;
+.room2 {
+    width: 21%;
+    height: 170px;
+    background-color: chartreuse;
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
