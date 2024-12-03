@@ -1,0 +1,34 @@
+*{margin: 0;padding: 0}
+a{text-decoration: none;color: inherit;}
+ul{list-style: none;}
+body{background: #ffffff; color: 222328;}
+.wrap   {width: 1200px;margin: 0 auto;}
+.header {width: 100%;height:100px;position: relative;}
+.logo   {width: 200px;height:100px;float: left;}
+.logo img, .logo2 img {margin-top: 30px;}
+.nav    {width: 1000px;height:100px;float: left;}
+
+.main{position: absolute;z-index: 2;top: 20px;left: 550px;}
+.main li{width: 150px;float: left;color: #222328;background: #fff;text-align: center;font-size: 25px;line-height: 50px;}
+.main li:hover{color: #fff;background: #222328;}
+.sub{display: none;}
+.sub li{font-size: 22px;}
+.sub li:hover{}
+
+
+.slide  {width: 100%;height:300px;position: relative;overflow: hidden;}
+.slide img{top:0;position: absolute}
+.section{width: 100%;height:200px; }
+.notice {width: 400px;height:200px;float: left;}
+.notice h2{width: 150px;line-height: 50px; float: left; text-align: center}
+.notice pre{font-size: 15px; line-height: 24px;width: 400px; float: right;}
+.notice img{width: 127px;height: 143px;display: none;float: left;}
+
+
+.banner {width: 400px;height:200px;float: left;}
+.banner img, .short img {width: 400px;height: 200px;}
+.short  {width: 400px;height:200px;float: left;}
+.footer {width: 100%;height:100px; }
+.logo2  {width: 200px;height:100px;float: left;}
+.copy   {width: 800px;height:75px;float: left;text-align: center;padding-top: 25px;}
+.sns    {width: 200px;height:80px;float: left;padding-top: 20px;}
