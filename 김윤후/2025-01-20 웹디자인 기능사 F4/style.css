@@ -1,0 +1,103 @@
+/**전체세팅  */
+@charset "utf-8";
+*{
+    margin: 0 auto;
+    padding: 0;
+}
+li {
+    list-style: none;
+}
+a{
+    display: block;
+    text-decoration: none;
+}
+#wrap {
+    width: 100%;
+}
+
+/* header */
+#header {
+    position: relative;
+    width: 1340px;
+    height: 100px;
+    background-color: #333;
+}
+.logo {
+    position: absolute;
+    left: 0;
+    width: 200px;
+    height: 100px;
+    background-color: #444;
+}
+.nav {
+    position: absolute;
+    right: 50px;
+    bottom: 0;
+    width: 600px;
+    height: 60px;
+    background-color: #555;
+}
+/*visual */
+#visual {
+    width: 100%;
+    height: 350px;
+    background-color: #666
+}
+/* content  */
+#content {
+    position: absolute;
+    top: 350px;
+    left:calc(50% - 670px);
+    width: 1340px;
+    background-color:#777;
+    height: 300px;
+}
+.shortcut {
+    width: 1340px;
+    height: 100px;
+    background-color: #888;
+}
+.banner {
+    width: 1340px;
+    height: 150px;
+    background-color: #999;
+}
+.notice-box {
+    display: flex;
+    width: 1340px;
+    height: 300px;
+    background-color: #888;
+}
+.notice {
+    width: 50%;
+    height: 300px;
+    background-color: #777;
+}
+.gallery {
+    width: 50%;
+    height: 300px;
+    background-color: #666;
+}
+#footer {
+    position: absolute;
+    top: 900px;
+    left: calc(50% - 670px);
+    display: flex;
+    width: 1340px;
+    height: 100px;
+}
+.footer-logo {
+    width: 20%;
+    height: 100px;
+    background-color: #444;
+}
+.copyright {
+    width: 60%;
+    height: 100px;
+    background-color: #333;
+}
+.site {
+    width: 20%;
+    height: 100px;
+    background-color: #444;
+}
