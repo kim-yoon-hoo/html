@@ -1,66 +1,197 @@
 @charset "utf-8";
 
+/* reset */
 * {
     margin: 0 auto;
     padding: 0;
+    color: #333333
+}
+li {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+    display: block;
 }
 
-.living-room {
-    width: 1200px;
-    height: 560px;
+/* header */
+header {
+    position: relative;
+    width: 1340px;
+    height: 100px;
+    background-color: #e31a40;    
+}
+.logo {
+    position: absolute;
+    left: 0;
+    width: 200px;
+    height: 100px;
+    background-color: #222;
+    align-content: center;
+}
+nav {
+    position: absolute;
+    right: 50px;
+    bottom: 0;
+    width: 600px;
+    height: 60px;
+    background-color: #333;
+    z-index: 100;
+}
+nav > ul {
+    display: flex;
+}
+nav > ul > li > a {
+    width: 150px;
+    height: 60px;
+    color: #f5f5f5;
+    text-align: center;
+    align-content: center;
+}
+.sub-menu {
+    height: 0;
+    overflow: hidden;
+    transition: 0.5s;
+}
+.sub-menu > li > a {
+    height: 50px;
+    color: #e2e2e2;
+    background-color: #444;
+    text-align: center;
+    align-content: center;
+}
+nav a:hover {
+    background-color: #c10820;
+}
+nav ul:hover .sub-menu {
+    height: 200px;
+    transition: 0.5s;
+}
+#wrap:has(ul:hover) .sub-box {
+    height: 200px;
+    transition: 0.5s;
+}
+.sub-box {
+    top: 100px;
+    position: absolute;
+    width: 100%;
+    height: 0;
+    background-color: #444;
+    transition: 0.5s;
+}
+/* visual */
+#visual {
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
     position: relative;
 }
-.veranda {
+.img-list {
     width: 100%;
-    height: 160px;
-    background-color: blue;
+    height: 1050px;
+    animation: img-slide 9s infinite;
     position: absolute;
-    top: 0;
 }
-.main-room {
-    width: 23%;
+@keyframes img-slide {
+    0% {
+        top: 0;
+    }
+    22% {
+        top: 0;
+    }
+    33% {
+        top: -350px;
+    }
+    55% {
+        top: -350px;
+    }
+    66% {
+        top: -700px;
+    }
+    88% {
+        top: -700px;
+    }
+    100% {
+        top: -1050px;
+    }
+}
+.img-list li {
+    width: 100%;
+    height: 350px;
+    position: relative;
+}
+.img-list img{
+    width: 100%;
+    height: 350px;
+}
+.img-list h1 {
+    color: #e2e2e2;
+    width: 800px;
+    top: 50%;
+    left: 50%;
+    height: 150px;
+    text-align: center;
+    align-content: center;
+    background-color: rgba(0,0,0,0.8);
+    position: absolute;
+    transform: translate(-50%,-85%);
+    font-size: 2em;
+}
+
+
+/* contents */
+#contents {
+    position: relative;
+    width: 1340px;
+    background-color: #555;
+}
+.link {
+    position: absolute;
+    top: -100px;
+    width: 1340px;
+    height: 100px;
+    background-color: #666;
+}
+.banner {
+    width: 1340px;
     height: 200px;
-    background-color: gray;
-    position: absolute;
-    top: 160px;
+    background-color: #777;
 }
-.kitchen {
-     width: 20%;
-     height: 200px;
-     background-color: green;
-     position: absolute;
-     top: 360px;
+.notice-box {
+    display: flex;
+    width: 1340px;
+    height: 400px;
+    background-color: #888;
 }
-.gate {
-    width: 16%;
-    height: 80px;
-    background-color: yellow;
-    position: absolute;
-    top: 480PX;
-    left: 600px;
-    transform: translate(-50%);
+.notice {
+    width: 50%;
+    height: 400px;
+    background-color: #999;
 }
-.room1 {
-    width:  21%;
-    height: 160px;
-    background-color: rgba(128, 128, 128, 0.595);
-    position: absolute;
-    right: 0;
-    top: 160px;
+.gallery {
+    width: 50%;
+    height: 400px;
+    background-color: #888;
 }
-.washroom {
-    width: 14%;
-    height: 220px;
-    background-color: red;
-    position: absolute;
-    top: 319px;
-    right: 0;
+
+/* footer */
+footer {
+    display: flex;
+    width: 1340px;
+    height: 100px;
 }
-.room2 {
-    width: 21%;
-    height: 170px;
-    background-color: chartreuse;
-    position: absolute;
-    bottom: 0;
-    right: 0;
+.footer-logo {
+    width: 200px;
+    height: 100px;
+    background-color: #777;
+}
+.copyright {
+    width: 900px;
+    height: 100px;
+    background-color: #666;
+}
+.site {
+    width: 240px;
+    height: 100px;
+    background-color: #555;
 }
