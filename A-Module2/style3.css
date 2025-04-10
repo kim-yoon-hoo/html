@@ -1,0 +1,247 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial,  sans-serif;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+    display: inline-block;
+}
+
+.wrap {
+    width: 100%;
+}
+
+header {
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    display: flex;
+    background-color: #fff;
+    z-index: 9999;
+    top: 0;
+    border-bottom: 1px solid #aaa;
+}
+
+.inner {
+    display: flex;
+    width: 1530px;
+    margin: 0 auto;
+}
+.logo {
+    width: 20%;
+    height: 100px;
+    text-align: center;
+    align-content: center;
+}
+
+.logo p {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.nav {
+    width: 800px;
+    height: 100px;
+    text-align: center;
+    align-content: center;
+}
+
+.menu {
+    display: flex;
+}
+
+.menu > li > a {
+    width: 200px;
+    height: 100px;
+    text-align: center;
+    align-content: center;
+}
+
+.sub-menu {
+    overflow: hidden;
+    height: 0px;
+    transition: 0.3s;
+}
+
+.sub-menu > li {
+    width: 200px;
+    height: 80px;
+    text-align: center;
+    align-content: center;
+    background-color: #f5e9e9;
+}
+
+.menu:hover .sub-menu {
+    height: 400px;
+}
+
+.sub-menu li:hover {
+    background-color: skyblue;
+}
+
+.menu > li > a:hover {
+    border-bottom: 3px solid skyblue;
+}
+
+/* 유틸 */
+.util ul {
+    display: flex;
+}
+
+.util li {
+    width: 110px;
+    height: 100px;
+    text-align: center;
+    align-content: center;
+    padding: 20px;
+}
+
+
+.util a:hover {
+    text-decoration: underline;
+    color: blue;
+}
+
+/* 카테고리 */
+
+.Category {
+    width: 100%;
+    text-align: center;
+    align-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.Category p {
+    font-size: 40px;
+}
+
+.Category h3 {
+    font-size: 30px;
+    margin-right: 79%;
+}
+
+.product-container {
+    margin-top: 100px;
+    justify-content: space-between;
+    max-width: 1200px;
+    padding: 20px;
+    display: flex;
+    white-space: pre-line;
+    justify-content: center;
+    gap: 12px;
+}
+
+.product-box {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+
+.product-box img {
+    width: 280px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.product-box h4 {
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+.product-box p {
+    font-size: 18px;
+    color: #aaa;
+    white-space: pre-line;
+}
+
+.product-box .price {
+    font-size: 20px;
+    font-weight: bold;
+    color: red;
+}
+
+.product-box > .price > del {
+    color: yellowgreen;
+    font-size: 15px;
+}
+
+.product-box:hover {
+    transform: scale(1.05);
+    transition: 0.4s;
+}
+
+.product-box {
+    margin-bottom: 150px;
+}
+
+/* 푸터 */
+
+.footer {
+    width: 100%;
+    height: 600px;
+    background-color: #d9d9d9;
+}
+
+.footer-box {
+    margin: 0 auto;
+    width: 1700px;
+    height: 600px;
+    position: relative;
+}
+
+.footer-right {
+    right: 0%;
+    width: 500px;
+    height: 320px;
+    position: absolute;
+}
+
+.footer-right p {
+    font-size: 17px;
+    white-space: pre-line;
+    font-weight: 200;
+}
+
+.footer-left {
+    position: absolute;
+    left: 0%;
+    width: 700px;
+    height: 600px;
+    background-color: #d9d9d9;
+}
+
+.footer-left p {
+    font-size: 17px;
+    white-space: pre-line;
+    font-weight: 200;
+}
+
+/* 푸터 아이콘 */
+
+.sns-icon {
+    filter: grayscale(100%);
+    position: absolute;
+    left: 0%;
+    bottom: 40%;
+}
+
+
+.sns-icon img {
+    width: 50px;
+    height: 50px;
+}
+
+.sns-icon:hover {
+    filter: grayscale(0%);
+}

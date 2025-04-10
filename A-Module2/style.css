@@ -1,0 +1,665 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial,  sans-serif;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+    display: inline-block;
+}
+
+.wrap {
+    width: 100%;
+}
+
+header {
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    display: flex;
+    background-color: #fff;
+    z-index: 9999;
+    top: 0;
+    border-bottom: 1px solid #aaa;
+}
+
+.inner {
+    display: flex;
+    width: 1530px;
+    margin: 0 auto;
+}
+.logo {
+    width: 20%;
+    height: 100px;
+    text-align: center;
+    align-content: center;
+}
+
+.logo p {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.nav {
+    width: 800px;
+    height: 100px;
+    text-align: center;
+    align-content: center;
+}
+
+.menu {
+    display: flex;
+}
+
+.menu > li > a {
+    width: 200px;
+    height: 100px;
+    text-align: center;
+    align-content: center;
+}
+
+.sub-menu {
+    overflow: hidden;
+    height: 0px;
+    transition: 0.3s;
+}
+
+.sub-menu > li {
+    width: 200px;
+    height: 80px;
+    text-align: center;
+    align-content: center;
+    background-color: #f5e9e9;
+}
+
+.menu:hover .sub-menu {
+    height: 400px;
+}
+
+.sub-menu li:hover {
+    background-color: skyblue;
+}
+
+.menu > li > a:hover {
+    border-bottom: 3px solid skyblue;
+}
+
+/* 유틸 */
+.util ul {
+    display: flex;
+}
+
+.util li {
+    width: 110px;
+    height: 100px;
+    text-align: center;
+    align-content: center;
+    padding: 20px;
+}
+
+
+.util a:hover {
+    text-decoration: underline;
+    color: blue;
+}
+/* 자동슬라이더 */
+
+.slider {
+    margin-top: 100px;
+}
+
+.slide {
+    position: relative;
+    font-size: 0;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.slide img {
+    width: 100%;
+    height: 800px;
+    object-fit: cover;
+}
+
+.slider li {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    animation: 12s img-slide infinite linear;
+}
+
+@keyframes img-slide {
+    0% {
+        left: 0;
+    }
+
+    22% {
+        left: 0;
+    }
+
+    33% {
+        left: -100%;
+    }
+
+    55% {
+        left: -100%;
+    }
+
+    66% {
+        left: -200%;
+    }
+
+    88% {
+        left: -200%;
+    }
+
+    100% {
+        left: -300%;
+    }
+}
+
+.slider:hover .slide li {
+    animation-play-state: paused;
+}
+
+.text-box {
+    width: 670px;
+    height: 100px;
+    position: absolute;
+    text-align: center;
+    align-content: center;
+    padding: 20px;
+    left: 20px;
+    bottom: 20px;
+    font-size: 18px;
+    color: #fff;
+    background-color: rgb(0,0,0,0.5);
+    font-weight: 600;
+}
+
+section {
+    margin-bottom: 280px;
+}
+/* 카테고리 */
+
+.Category {
+    width: 100%;
+    text-align: center;
+    align-content: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.Category p {
+    font-size: 40px;
+}
+
+.Category h3 {
+    font-size: 30px;
+    margin-right: 79%;
+}
+
+.product-container {
+    justify-content: space-between;
+    max-width: 1000px;
+    padding: 20px;
+    display: flex;
+    white-space: pre-line;
+}
+
+.product-box {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+
+.product-box img {
+    width: 280px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.product-box h4 {
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+.product-box p {
+    font-size: 18px;
+    color: #aaa;
+    white-space: pre-line;
+}
+
+.product-box .price {
+    font-size: 20px;
+    font-weight: bold;
+    color: red;
+}
+
+.product-box > .price > del {
+    color: yellowgreen;
+    font-size: 15px;
+}
+
+.product-box:hover {
+    transform: scale(1.05);
+    transition: 0.4s;
+}
+
+.product-box {
+    margin-bottom: 150px;
+}
+/* 공지사항 */
+.notice {
+    width: 100%;
+    margin-top: 100px;
+    text-align: center;
+    align-content: center;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+    align-content: center;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+td {
+    width: 100px;
+    height: 90px;
+}
+
+tbody > tr {
+    border-bottom: 1px solid #000;
+}
+
+/* 공지사항 버튼 */
+
+.notice-button {
+    justify-content: center;
+    display: flex;
+    margin-top: 20px;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    font-size: 30px;
+    background-color: #fff;
+    padding: 7px;
+}
+
+.notice-button {
+    margin-bottom: 100px;
+}
+
+/* 콘텐츠 배너 */
+
+.content {
+    width: 100%;
+    height: 700px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.content h4 {
+    font-size: 40px;
+    text-align: left;
+    border-bottom: 1px solid #000;
+}
+
+.content p {
+    white-space: pre-line;
+    text-align: left;
+    font-size: 20px;
+}
+
+ /* 콘텐츠 박스 1 */
+
+.box1 {
+    position: absolute;
+    width: 200px;
+    top: 20%;
+    height: 200px;
+    text-align: center;
+    align-content: center;
+    background-color: white;
+    border: 1px solid #000;
+    color: skyblue;
+    border-radius: 10px;
+}
+
+.box1 h2 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.box1 i {
+    font-size: 80px;
+}   
+
+
+
+/* 콘텐츠 박스2 */
+
+.box2 {
+    position: absolute;
+    width: 200px;
+    top: 20%;
+    left: 27%;
+    height: 200px;
+    text-align: center;
+    align-content: center;
+    background-color: white;
+    border: 1px solid #000;
+    color: skyblue;
+    border-radius: 10px;
+}
+
+.box2 h2 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.box2 i {
+    font-size: 80px;
+}   
+
+/* 콘텐츠박스3 */
+
+
+.box3 {
+    position: absolute;
+    width: 200px;
+    top: 20%;
+    left: 54%;
+    height: 200px;
+    text-align: center;
+    align-content: center;
+    background-color: white;
+    border: 1px solid #000;
+    color: skyblue;
+    border-radius: 10px;
+}
+
+.box3 h2 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.box3 i {
+    font-size: 80px;
+}   
+
+
+/* 콘텐츠 박스4 */
+
+.box4 {
+    position: absolute;
+    width: 200px;
+    top: 20%;
+    right: 0%;
+    height: 200px;
+    text-align: center;
+    align-content: center;
+    background-color: white;
+    border: 1px solid #000;
+    color: skyblue;
+    border-radius: 10px;
+}
+
+.box4 h2 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.box4 i {
+    font-size: 80px;
+}   
+
+
+
+/* 입점 절차 안내 */
+
+.content1 {
+    height: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.content1-box1 {
+    width: 500px;
+    height: 200px;
+    background-color: #fff;
+    margin: 0 auto;
+    border: 1px solid #000;
+}
+
+.content1-box1 p  {
+    font-size: 30px;
+    font-weight: bold;
+    white-space: pre-line;
+}
+
+.content1-box1 h1 {
+    margin-top: 30px;
+    font-size: 20px;
+    font-weight: 400;
+    white-space: pre-line;
+}
+
+.font-awesome i {
+    font-size: 50px;
+}
+
+/* 입점 절차 안내2 */
+
+.content2-box2 {
+    width: 500px;
+    height: 200px;
+    background-color: #fff;
+    margin: 0 auto;
+    border: 1px solid #000;
+}
+
+.content2-box2 p  {
+    font-size: 30px;
+    font-weight: bold;
+    white-space: pre-line;
+}
+
+.content2-box2 h1 {
+    margin-top: 30px;
+    font-size: 20px;
+    font-weight: 400;
+    white-space: pre-line;
+}
+
+.font-awesome i {
+    font-size: 50px;
+}
+
+/* 입점 절차 안내3 */
+
+.content3-box3 {
+    width: 500px;
+    height: 200px;
+    background-color: #fff;
+    margin: 0 auto;
+    border: 1px solid #000;
+}
+
+.content3-box3 p  {
+    font-size: 30px;
+    font-weight: bold;
+    white-space: pre-line;
+}
+
+.content3-box3 h1 {
+    margin-top: 30px;
+    font-size: 20px;
+    font-weight: 400;
+    white-space: pre-line;
+}
+
+.font-awesome i {
+    font-size: 50px;
+}
+
+
+/* 입점 절차 안내4 */
+
+.content4-box4 {
+    width: 500px;
+    height: 200px;
+    background-color: #fff;
+    margin: 0 auto;
+    border: 1px solid #000;
+}
+
+.content4-box4 p  {
+    font-size: 30px;
+    font-weight: bold;
+    white-space: pre-line;
+}
+
+.content4-box4 h1 {
+    margin-top: 30px;
+    font-size: 20px;
+    font-weight: 400;
+    white-space: pre-line;
+}
+
+.font-awesome i {
+    font-size: 50px;
+}
+
+/* 입점 절차 안내5 */
+
+.content5-box5 {
+    width: 500px;
+    height: 200px;
+    background-color: #fff;
+    margin: 0 auto;
+    border: 1px solid #000;
+}
+
+.content5-box5 p  {
+    font-size: 30px;
+    font-weight: bold;
+    white-space: pre-line;
+}
+
+.content5-box5 h1 {
+    margin-top: 30px;
+    font-size: 20px;
+    font-weight: 400;
+    white-space: pre-line;
+}
+
+.font-awesome i {
+    font-size: 50px;
+}
+
+/* 입점 절차 안내6 */
+
+.content6-box6 {
+    width: 500px;
+    height: 200px;
+    background-color: #fff;
+    margin: 0 auto;
+    border: 1px solid #000;
+}
+
+.content6-box6 p  {
+    font-size: 30px;
+    font-weight: bold;
+    white-space: pre-line;
+}
+
+.content6-box6 h1 {
+    margin-top: 30px;
+    font-size: 20px;
+    font-weight: 400;
+    white-space: pre-line;
+}
+
+.font-awesome i {
+    font-size: 50px;
+}
+
+.Category {
+    margin-bottom: 800px;
+}
+
+/* 푸터 */
+
+.footer {
+    width: 100%;
+    height: 600px;
+    background-color: #d9d9d9;
+}
+
+.footer-box {
+    margin: 0 auto;
+    width: 1700px;
+    height: 600px;
+    position: relative;
+}
+
+.footer-right {
+    right: 0%;
+    width: 500px;
+    height: 320px;
+    position: absolute;
+}
+
+.footer-right p {
+    font-size: 17px;
+    white-space: pre-line;
+    font-weight: 200;
+}
+
+.footer-left {
+    position: absolute;
+    left: 0%;
+    width: 700px;
+    height: 600px;
+    background-color: #d9d9d9;
+}
+
+.footer-left p {
+    font-size: 17px;
+    white-space: pre-line;
+    font-weight: 200;
+}
+
+/* 푸터 아이콘 */
+
+.sns-icon {
+    filter: grayscale(100%);
+    position: absolute;
+    left: 0%;
+    bottom: 40%;
+}
+
+
+.sns-icon img {
+    width: 50px;
+    height: 50px;
+}
+
+.sns-icon:hover {
+    filter: grayscale(0%);
+}
