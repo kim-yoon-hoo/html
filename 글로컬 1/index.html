@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>글로컬웹개발동아리</title>
+    <link rel="stylesheet" href="csssibal/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    
+  </head>
+  
+<div id="loading">
+  <div class="loading-bar-container">
+    <div class="loading-bar"></div>
+  </div>
+</div>
+  <body>
+    
+    <div class="overlay"></div>
+    <!-- 전체 덮는 오버레이 -->
+     <div id="wrap">
+      <header>
+        <div class="header_inner">
+            <img src="logo.png" alt="보이스가드" class="logo" />
+            <nav class="nav-menu">
+              <a href="#">홈</a>
+              <a href="#">보이스피싱이란?</a>
+              <a href="#">예방법</a>
+              <a href="#">피해신고</a>
+              <a href="#">상담</a>
+            </nav>
+            <div class="header_util">
+              <button class="btn red">문의하기</button>
+              <button class="btn gray">버튼</button>
+              <i class="fa-solid fa-magnifying-glass icon"></i>
+              <i class="fa-solid fa-bars icon"></i>
+            </div>
+        </div>
+      </header>
+
+      <section class="hero">
+        <div class="container">
+        
+          <div class="overlay"></div>
+        </div>
+        <div class="slide-text">
+          <h1>보이스피싱, 알고 대비하면 막을 수 있습니다.</h1>
+          <h3>낯선 전화, 한번 더 생각하세요.</h3>
+          <a href="index.html">자세히 알아보기 →</a>
+        </div>
+        <div class="slider">
+  <div class="slidebox">
+    <div class="slidelist">
+      <div class="slideitem"><img src="/section1.png" alt="slide1"></div>
+      <div class="slideitem"><img src="/section2.png" alt="slide2"></div>
+      <div class="slideitem"><img src="/section3.png" alt="slide3"></div>
+      <div class="slideitem"><img src="/section4.png" alt="slide3"></div>
+      <div class="slideitem"><img src="/section5.png" alt="slide3"></div>
+    </div>
+  </div>
+</div>
+      </section>
+    </div>
+
+    <script>
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      document.body.classList.add("loaded");
+    }, 3000); 
+  });
+
+
+  const slidelist = document.querySelector('.slidelist');
+  const slides = document.querySelectorAll('.slideitem');
+  let currentIndex = 0;
+  const totalSlides = slides.length;
+
+  function goToSlide(index) {
+    slidelist.style.transition = "transform 0.8s ease-in-out";
+    slidelist.style.transform = `translateX(-${100 * index}%)`;
+  }
+
+  function nextSlide() {
+    currentIndex++;
+    if (currentIndex === totalSlides) {
+      
+      slidelist.style.transition = "transform 0.8s ease-in-out";
+      slidelist.style.transform = `translateX(-${100 * currentIndex}%)`;
+
+      setTimeout(() => {
+      
+        slidelist.style.transition = "none";
+        slidelist.style.transform = "translateX(0)";
+        currentIndex = 0;
+      }, 800); 
+    } else {
+      goToSlide(currentIndex);
+    }
+  }
+
+  
+  const firstSlide = slides[0].cloneNode(true);
+  slidelist.appendChild(firstSlide);
+
+  setInterval(nextSlide, 3000);
+</script>
