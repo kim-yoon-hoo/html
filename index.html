@@ -3,86 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>하이글로벌컴퍼니</title>
     <link rel="stylesheet" href="style.css">
+    <title>Document</title>
 </head>
 <body>
-    <div id="wrap">
-        <header>
-            <div class="logo">
-                <a href="#"><img src="logo.png" alt="logo"></a>
-            </div>
-            <nav>
-                <ul>
-                    <li>
-                        <a href="#">회사소개</a>
-                        <ul class="sub-menu">
-                            <li><a href="#">CEO인삿말</a></li>
-                            <li><a href="#">기업문화</a></li>
-                            <li><a href="#">경영방침</a></li>
-                            <li><a href="#">회사연락</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">사업소개</a>
-                        <ul class="sub-menu">
-                            <li><a href="#">반도체 설비운영</a></li>
-                            <li><a href="#">건축공사사</a></li>
-                            <li><a href="#">UHP 배관공사</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">회사활동</a>
-                        <ul class="sub-menu">
-                            <li><a href="#">윤리경영</a></li>
-                            <li><a href="#">허경영</a></li>
-                            <li><a href="#">인천보건경영</a></li>
-                            <li><a href="#">품질경영</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">인재채용</a>
-                        <ul class="sub-menu">
-                            <li><a href="#">인재채용</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-        <div class="sub-box"></div>
-        <section id="visual">
-            <ul class="img-list">
-                <li>
-                    <img src="https://picsum.photos/id/16/1600/350" alt="slide1">
-                    <h1>하이글로벌컴퍼니에 오신 것을 환영합니다.</h1>
+    <div class="wrpa">
+        <header class="header">
+    <div class="container">
+        <h1 class="logo">
+            <a href="index.html">
+                <div class="logo-symbol">
+                    <span class="book-page left"></span>
+                    <span class="book-page right"></span>
+                    <span class="gear"></span> </div>
+                <span class="logo-text">스킬스북도서관</span>
+            </a>
+        </h1>
+
+        <nav class="nav">
+            <ul class="main-menu">
+                <li class="menu-list">
+                    <input type="checkbox" id="menu1" class="menu-trigger">
+                    <label for="menu1" class="menu-item">
+                        도서관소개 <span class="icon"></span>
+                    </label>
+                    <ul class="sub-menu">
+                        <li><a href="#">도서관소개</a></li>
+                        <li><a href="#">도서관현황</a></li>
+                    </ul>
                 </li>
-                <li>
-                    <img src="https://picsum.photos/id/20/1600/350" alt="slide1">
-                    <h1>대통령을 탄핵하라</h1>
+
+                <li class="menu-list">
+                    <input type="checkbox" id="menu2" class="menu-trigger">
+                    <label for="menu2" class="menu-item">
+                        도서자료실 <span class="icon"></span>
+                    </label>
+                    <ul class="sub-menu">
+                        <li><a href="#">자료실</a></li>
+                        <li><a href="#">열람실예약</a></li>
+                    </ul>
                 </li>
-                <li>
-                    <img src="https://picsum.photos/id/6/1600/350" alt="slide1">
-                    <h1>방재운 죽인다</h1>
+
+                <li class="menu-list">
+                    <input type="checkbox" id="menu3" class="menu-trigger">
+                    <label for="menu3" class="menu-item">
+                        회원서비스 <span class="icon"></span>
+                    </label>
+                    <ul class="sub-menu">
+                        <li><a href="#">회원가입</a></li>
+                        <li><a href="#">마이페이지</a></li>
+                    </ul>
                 </li>
-                <li>
-                    <img src="https://picsum.photos/id/16/1600/350" alt="slide1">
-                    <h1>하이글로벌컴퍼니에 오신 것을 환영합니다.</h1>
-                </li>
+
+                <li><a href="#" class="menu-item">신규도서등록</a></li>
+                <li><a href="#" class="menu-item">대출/열람실</a></li>
             </ul>
-        </section>
-        <section id="contents">
-            <article class="link"></article>
-            <article class="banner"></article>
-            <div class="notice-box">
-                <article class="notice"></article>
-                <article class="gallery"></article>
-            </div>
-        </section>
-        <footer>    
-            <div class="footer-logo"></div>
-            <div class="copyright"></div>
-            <div class="site"></div>
-        </footer>
+        </nav>
+
+        <div class="user-menu">
+
+            <a href="#">로그인</a>
+
+            <span class="bar"></span>
+
+            <a href="#">회원가입</a>
+
+        </div>
+    </div>
+</header>
     </div>
 </body>
 </html>
