@@ -7,208 +7,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>스킬스북도서관</title>
-    <style>
-    /* ───────────────────────────────────────
-       추천도서 슬라이더 (book-section 전용)
-    ─────────────────────────────────────── */
-    :root {
-        --bk-w: 340px;
-        --bk-h: 460px;
-        --bk-dur: 480ms;
-        --bk-dark: #1a1410;
-        --bk-accent: #c4602a;
-        --bk-muted: #8a7f75;
-    }
 
-    .book-section {
-        background: #f7f3ee;
-        padding: 80px 20px;
-        position: relative;
-    }
-
-    .book-anchor { display: block; position: absolute; visibility: hidden; }
-
-    .book-title {
-        text-align: center;
-        font-family: 'Noto Serif KR', serif;
-        font-size: 26px;
-        color: #5D4037;
-        margin-bottom: 6px;
-        letter-spacing: 1px;
-    }
-
-    .book-lbl {
-        display: block;
-        text-align: center;
-        font-family: 'Noto Serif KR', serif;
-        font-size: 11px;
-        letter-spacing: .35em;
-        color: var(--bk-accent);
-        margin-bottom: 40px;
-    }
-
-    .bk-sec {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .bk-sw {
-        width: min(var(--bk-w), 90vw);
-        height: var(--bk-h);
-        overflow: hidden;
-        border-radius: 4px;
-    }
-
-    .bk-st {
-        display: flex;
-        height: 100%;
-        transition: transform var(--bk-dur) cubic-bezier(.77,0,.175,1);
-    }
-
-    #bs1:target ~ .bk-sec .bk-st { transform: translateX(calc(-0 * min(var(--bk-w),90vw))); }
-    #bs2:target ~ .bk-sec .bk-st { transform: translateX(calc(-1 * min(var(--bk-w),90vw))); }
-    #bs3:target ~ .bk-sec .bk-st { transform: translateX(calc(-2 * min(var(--bk-w),90vw))); }
-    #bs4:target ~ .bk-sec .bk-st { transform: translateX(calc(-3 * min(var(--bk-w),90vw))); }
-    #bs5:target ~ .bk-sec .bk-st { transform: translateX(calc(-4 * min(var(--bk-w),90vw))); }
-    #bs6:target ~ .bk-sec .bk-st { transform: translateX(calc(-5 * min(var(--bk-w),90vw))); }
-    #bs7:target ~ .bk-sec .bk-st { transform: translateX(calc(-6 * min(var(--bk-w),90vw))); }
-
-    .bk-card {
-        flex: 0 0 min(var(--bk-w), 90vw);
-        height: var(--bk-h);
-        border-radius: 4px;
-        overflow: hidden;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-    }
-    .bk-card:nth-child(1) { background: #e8d5b7; }
-    .bk-card:nth-child(2) { background: #b8d4e8; }
-    .bk-card:nth-child(3) { background: #d4e8b8; }
-    .bk-card:nth-child(4) { background: #e8b8d4; }
-    .bk-card:nth-child(5) { background: #2c3e50; }
-    .bk-card:nth-child(6) { background: #3d2b1f; }
-    .bk-card:nth-child(7) { background: #1a3a2a; }
-
-    .bk-card img {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center top;
-    }
-
-    .bk-info {
-        position: relative;
-        z-index: 1;
-        padding: 24px 24px 28px;
-        background: linear-gradient(to top, rgba(0,0,0,.72), transparent);
-    }
-    .bk-ord  { font-size: 10px; letter-spacing: .2em; color: rgba(255,255,255,.55); margin-bottom: 8px; }
-    .bk-tit  { font-family: 'Noto Serif KR', serif; font-size: 17px; font-weight: 600; color: #fff; line-height: 1.5; margin-bottom: 10px; }
-    .bk-aut  { font-size: 12px; color: rgba(255,255,255,.65); font-weight: 300; }
-
-    .bk-pb {
-        margin-top: 20px;
-        width: min(var(--bk-w), 90vw);
-        height: 2px;
-        background: rgba(26,20,16,.12);
-        border-radius: 2px;
-        overflow: hidden;
-    }
-    .bk-pf {
-        height: 100%;
-        background: var(--bk-accent);
-        border-radius: 2px;
-        transition: width var(--bk-dur) cubic-bezier(.77,0,.175,1);
-        width: calc(100% / 7);
-    }
-    #bs1:target ~ .bk-sec .bk-pf { width: calc(100% * 1 / 7); }
-    #bs2:target ~ .bk-sec .bk-pf { width: calc(100% * 2 / 7); }
-    #bs3:target ~ .bk-sec .bk-pf { width: calc(100% * 3 / 7); }
-    #bs4:target ~ .bk-sec .bk-pf { width: calc(100% * 4 / 7); }
-    #bs5:target ~ .bk-sec .bk-pf { width: calc(100% * 5 / 7); }
-    #bs6:target ~ .bk-sec .bk-pf { width: calc(100% * 6 / 7); }
-    #bs7:target ~ .bk-sec .bk-pf { width: 100%; }
-
-    .bk-ctrl {
-        margin-top: 28px;
-        display: flex;
-        align-items: center;
-        gap: 20px;
-    }
-    .bk-btn {
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        border: 1.5px solid var(--bk-dark);
-        background: transparent;
-        cursor: pointer;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        color: var(--bk-dark);
-        text-decoration: none;
-        transition: background .2s, color .2s;
-        line-height: 0;
-    }
-    .bk-btn:hover { background: var(--bk-dark); color: #f7f3ee; }
-    .bk-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-
-    .bp1, .bn1 { display: flex; }
-    #bs1:target ~ .bk-sec .bk-btn { display: none; } #bs1:target ~ .bk-sec .bp1 { display: flex; } #bs1:target ~ .bk-sec .bn1 { display: flex; }
-    #bs2:target ~ .bk-sec .bk-btn { display: none; } #bs2:target ~ .bk-sec .bp2 { display: flex; } #bs2:target ~ .bk-sec .bn2 { display: flex; }
-    #bs3:target ~ .bk-sec .bk-btn { display: none; } #bs3:target ~ .bk-sec .bp3 { display: flex; } #bs3:target ~ .bk-sec .bn3 { display: flex; }
-    #bs4:target ~ .bk-sec .bk-btn { display: none; } #bs4:target ~ .bk-sec .bp4 { display: flex; } #bs4:target ~ .bk-sec .bn4 { display: flex; }
-    #bs5:target ~ .bk-sec .bk-btn { display: none; } #bs5:target ~ .bk-sec .bp5 { display: flex; } #bs5:target ~ .bk-sec .bn5 { display: flex; }
-    #bs6:target ~ .bk-sec .bk-btn { display: none; } #bs6:target ~ .bk-sec .bp6 { display: flex; } #bs6:target ~ .bk-sec .bn6 { display: flex; }
-    #bs7:target ~ .bk-sec .bk-btn { display: none; } #bs7:target ~ .bk-sec .bp7 { display: flex; } #bs7:target ~ .bk-sec .bn7 { display: flex; }
-
-    .bk-cnt {
-        font-family: 'Noto Serif KR', serif;
-        font-size: 14px;
-        color: var(--bk-dark);
-        min-width: 56px;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 3px;
-    }
-    .bk-cur { font-size: 20px; font-weight: 700; }
-    .bk-cur::before { content: "1"; }
-    #bs1:target ~ .bk-sec .bk-cur::before { content: "1"; }
-    #bs2:target ~ .bk-sec .bk-cur::before { content: "2"; }
-    #bs3:target ~ .bk-sec .bk-cur::before { content: "3"; }
-    #bs4:target ~ .bk-sec .bk-cur::before { content: "4"; }
-    #bs5:target ~ .bk-sec .bk-cur::before { content: "5"; }
-    #bs6:target ~ .bk-sec .bk-cur::before { content: "6"; }
-    #bs7:target ~ .bk-sec .bk-cur::before { content: "7"; }
-    </style>
 </head>
 <body>
-    <!-- 달력 radio 인풋 (body 최상단 필수) -->
-    <input type="radio" name="cal" id="r01">
-<input type="radio" name="cal" id="r02">
-<input type="radio" name="cal" id="r03">
-<input type="radio" name="cal" id="r04" checked>
-<input type="radio" name="cal" id="r05">
-<input type="radio" name="cal" id="r06">
-<input type="radio" name="cal" id="r07">
-<input type="radio" name="cal" id="r08">
-<input type="radio" name="cal" id="r09">
-<input type="radio" name="cal" id="r10">
-<input type="radio" name="cal" id="r11">
-<input type="radio" name="cal" id="r12">
+  
 
     <input type="checkbox" id="modal-trigger" class="modal-checkbox">
     <div class="modal-overlay">
         <div class="modal-window">
             <div class="modal-content">
-                <img src="/B-Module/images/images (5).png" alt="공고 이미지" class="modal-img">
+                <img src="/지방대회/B-Module/images/images (5).png" alt="공고 이미지" class="modal-img">
                 <div class="modal-text">
                     <h4>2025년 지방기능경기대회 참가원서 접수 공고사항을 아래 같이 알려드립니다.</h4>
                     <p>□ 접수기간 : 2025. 1. 13.(월) ～ 1. 24.(금) 18:00 마감 [12일간]</p>
@@ -277,21 +85,21 @@
             <div class="visual-slider">
                 <div class="slide-wrapper">
                     <div class="slide-item">
-                        <img src="/B-Module/images/images (71).jpg" alt="slide1">
+                        <img src="/지방대회/B-Module/images/images (71).jpg" alt="slide1">
                         <div class="slide-text">
                             <h2>지식의 깊이를 더하는 스킬스북</h2>
                             <p>전문 기술 도서와 함께 당신의 꿈을 설계하세요.</p>
                         </div>
                     </div>
                     <div class="slide-item">
-                        <img src="/B-Module/images/images (77).jpg" alt="slide2">
+                        <img src="/지방대회/B-Module/images/images (77).jpg" alt="slide2">
                         <div class="slide-text">
                             <h2>365일 열려있는 학습 공간</h2>
                             <p>쾌적한 열람실 예약 시스템을 지금 바로 이용해보세요.</p>
                         </div>
                     </div>
                     <div class="slide-item">
-                        <img src="/B-Module/images/images (73).jpg" alt="slide3">
+                        <img src="/지방대회/B-Module/images/images (73).jpg" alt="slide3">
                         <div class="slide-text">
                             <h2>함께 성장하는 지역 커뮤니티</h2>
                             <p>도서관에서 진행되는 다양한 기술 세미나에 참여하세요.</p>
@@ -361,58 +169,56 @@
                         <div class="program-grid">
                             <input type="checkbox" id="p1" class="p-trigger">
                             <label for="p1" class="program-card">
-                                <img src="/B-Module/프로그램/1.jpg" alt="1">
+                                <img src="/지방대회/B-Module/프로그램/1.jpg" alt="1">
                                 <div class="p-title">피아니스트 김미정과 함께하는 힐링 클래식</div>
                             </label>
                             <div class="p-modal"><div class="p-window"><iframe src="B-Module/프로그램/program1.txt"></iframe><label for="p1" class="p-close">닫기</label></div></div>
                             <input type="checkbox" id="p2" class="p-trigger">
                             <label for="p2" class="program-card">
-                                <img src="/B-Module/프로그램/2.png" alt="2">
+                                <img src="/지방대회/B-Module/프로그램/2.png" alt="2">
                                 <div class="p-title">도란도란] 나를 찾아가는 마음챙김 그림책테라피</div>
                             </label>
                             <div class="p-modal"><div class="p-window"><label for="p2" class="p-close">닫기</label></div></div>
                             <input type="checkbox" id="p3" class="p-trigger">
                             <label for="p3" class="program-card">
-                                <img src="/B-Module/프로그램/3.jpg" alt="3">
+                                <img src="/지방대회/B-Module/프로그램/3.jpg" alt="3">
                                 <div class="p-title">신흥어울마당작은]2024년 하반기 프로그램 ' 뚝딱 한국사'</div>
                             </label>
                             <div class="p-modal"><div class="p-window"><label for="p3" class="p-close">닫기</label></div></div>
                             <input type="checkbox" id="p4" class="p-trigger">
                             <label for="p4" class="program-card">
-                                <img src="/B-Module/프로그램/4.png" alt="4">
+                                <img src="/지방대회/B-Module/프로그램/4.png" alt="4">
                                 <div class="p-title">[수주](성인)마을미디어 교육생 모집</div>
                             </label>
                             <div class="p-modal"><div class="p-window"><label for="p4" class="p-close">닫기</label></div></div>
                             <input type="checkbox" id="p5" class="p-trigger">
                             <label for="p5" class="program-card">
-                                <img src="/B-Module/프로그램/5.jpg" alt="5">
+                                <img src="/지방대회/B-Module/프로그램/5.jpg" alt="5">
                                 <div class="p-title">나를 치유하는 명화</div>
                             </label>
                             <div class="p-modal"><div class="p-window"><label for="p5" class="p-close">닫기</label></div></div>
                             <input type="checkbox" id="p6" class="p-trigger">
                             <label for="p6" class="program-card">
-                                <img src="/B-Module/프로그램/6.jpg" alt="6">
+                                <img src="/지방대회/B-Module/프로그램/6.jpg" alt="6">
                                 <div class="p-title">[문화가 있는 날] 푸른 하늘이 좋아요!</div>
                             </label>
                             <div class="p-modal"><div class="p-window"><label for="p6" class="p-close">닫기</label></div></div>
                             <input type="checkbox" id="p7" class="p-trigger">
                             <label for="p7" class="program-card">
-                                <img src="/B-Module/프로그램/7.jpg" alt="7">
+                                <img src="/지방대회/B-Module/프로그램/7.jpg" alt="7">
                                 <div class="p-title">책 속에서 사람을 만나다</div>
                             </label>
                             <div class="p-modal"><div class="p-window"><label for="p7" class="p-close">닫기</label></div></div>
                             <input type="checkbox" id="p8" class="p-trigger">
                             <label for="p8" class="program-card">
-                                <img src="/B-Module/프로그램/8.jpg" alt="8">
+                                <img src="/지방대회/B-Module/프로그램/8.jpg" alt="8">
                                 <div class="p-title">서울 문화의 밤(8월) 행사 - 국지승 그림책 작가와 방구석 북토크</div>
                             </label>
                         </div>
                     </div>
                 </div><!-- /.container-news -->
 
-                <!-- ═══════════════════════════════════
-                     추천도서 슬라이더 섹션
-                ═══════════════════════════════════ -->
+
                 <div class="book-section">
 
                     <!-- :target 앵커 -->
@@ -431,7 +237,7 @@
                         <div class="bk-sw">
                             <div class="bk-st">
                                 <div class="bk-card">
-                                    <img src="/B-Module/추천도서/추천도서1.jpg" alt="나에게 나다움을 주기로 했다">
+                                    <img src="/지방대회/B-Module/추천도서/추천도서1.jpg" alt="나에게 나다움을 주기로 했다">
                                     <div class="bk-info">
                                         <p class="bk-ord">추천도서 1</p>
                                         <p class="bk-tit">나에게 나다움을 주기로 했다</p>
@@ -439,7 +245,7 @@
                                     </div>
                                 </div>
                                 <div class="bk-card">
-                                    <img src="/B-Module/추천도서/추천도서2.jpg" alt="여름이 반짝">
+                                    <img src="/지방대회/B-Module/추천도서/추천도서2.jpg" alt="여름이 반짝">
                                     <div class="bk-info">
                                         <p class="bk-ord">추천도서 2</p>
                                         <p class="bk-tit">여름이 반짝</p>
@@ -447,7 +253,7 @@
                                     </div>
                                 </div>
                                 <div class="bk-card">
-                                    <img src="/B-Module/추천도서/추천도서3.jpg" alt="사랑 한 꼬집을 넣으면">
+                                    <img src="/지방대회/B-Module/추천도서/추천도서3.jpg" alt="사랑 한 꼬집을 넣으면">
                                     <div class="bk-info">
                                         <p class="bk-ord">추천도서 3</p>
                                         <p class="bk-tit">사랑 한 꼬집을 넣으면</p>
@@ -455,7 +261,7 @@
                                     </div>
                                 </div>
                                 <div class="bk-card">
-                                    <img src="/B-Module/추천도서/추천도서4.jpg" alt="정말 정말 소리 지르고 싶어!">
+                                    <img src="/지방대회/B-Module/추천도서/추천도서4.jpg" alt="정말 정말 소리 지르고 싶어!">
                                     <div class="bk-info">
                                         <p class="bk-ord">추천도서 4</p>
                                         <p class="bk-tit">정말 정말 소리 지르고 싶어!</p>
@@ -463,7 +269,7 @@
                                     </div>
                                 </div>
                                 <div class="bk-card">
-                                    <img src="/B-Module/추천도서/추천도서5.jpg" alt="힐빌리의 노래">
+                                    <img src="/지방대회/B-Module/추천도서/추천도서5.jpg" alt="힐빌리의 노래">
                                     <div class="bk-info">
                                         <p class="bk-ord">추천도서 5</p>
                                         <p class="bk-tit">힐빌리의 노래</p>
@@ -471,7 +277,7 @@
                                     </div>
                                 </div>
                                 <div class="bk-card">
-                                    <img src="/B-Module/추천도서/추천도서6.jpg" alt="커피 한잔 할까요?">
+                                    <img src="/지방대회/B-Module/추천도서/추천도서6.jpg" alt="커피 한잔 할까요?">
                                     <div class="bk-info">
                                         <p class="bk-ord">추천도서 6</p>
                                         <p class="bk-tit">(허영만의) 커피 한잔 할까요?</p>
@@ -479,7 +285,7 @@
                                     </div>
                                 </div>
                                 <div class="bk-card">
-                                    <img src="/B-Module/추천도서/추천도서7.jpg" alt="두더지의 여름">
+                                    <img src="/지방대회/B-Module/추천도서/추천도서7.jpg" alt="두더지의 여름">
                                     <div class="bk-info">
                                         <p class="bk-ord">추천도서 7</p>
                                         <p class="bk-tit">두더지의 여름</p>
@@ -514,507 +320,112 @@
                             <a href="#bs7" class="bk-btn bn6"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
                             <a href="#bs1" class="bk-btn bn7"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
                         </div>
-                    </div><!-- /.bk-sec -->
+                    </div>
 
-                </div><!-- /.book-section -->
+                </div>
 
-        <!-- ════ 행사달력 섹션 ════ -->
-        <section class="cal-section">
-            <p class="cal-sub">LIBRARY SCHEDULE</p>
-            <h2 class="cal-ttl">행사달력</h2>
-            <nav class="cal-nav">
-                <label for="r01">1월</label><label for="r02">2월</label><label for="r03">3월</label>
-                <label for="r04">4월</label><label for="r05">5월</label><label for="r06">6월</label>
-                <label for="r07">7월</label><label for="r08">8월</label><label for="r09">9월</label>
-                <label for="r10">10월</label><label for="r11">11월</label><label for="r12">12월</label>
-            </nav>
-            <div class="cal-wrap">
-        <div class="cp" id="cp01">
-          <div class="cp-head">2026년 1월</div>
-          <div class="cal-grid">
-            <div class="dh sun">일</div><div class="dh">월</div><div class="dh">화</div>
-            <div class="dh">수</div><div class="dh">목</div><div class="dh">금</div><div class="dh sat">토</div>
-        <div class="dc-empty"></div>
-        <div class="dc-empty"></div>
-        <div class="dc-empty"></div>
-        <div class="dc-empty"></div>
-        <div class="dc"><span class="dn">1</span></div>
-        <div class="dc"><span class="dn">2</span></div>
-        <div class="dc sat"><span class="dn">3</span></div>
-        <div class="dc sun"><span class="dn">4</span></div>
-        <div class="dc"><span class="dn">5</span></div>
-        <div class="dc"><span class="dn">6</span></div>
-        <div class="dc"><span class="dn">7</span></div>
-        <div class="dc"><span class="dn">8</span></div>
-        <div class="dc"><span class="dn">9</span></div>
-        <div class="dc sat"><span class="dn">10</span></div>
-        <div class="dc sun"><span class="dn">11</span></div>
-        <div class="dc"><span class="dn">12</span></div>
-        <div class="dc"><span class="dn">13</span></div>
-        <div class="dc"><span class="dn">14</span></div>
-        <div class="dc"><span class="dn">15</span></div>
-        <div class="dc"><span class="dn">16</span></div>
-        <div class="dc sat"><span class="dn">17</span></div>
-        <div class="dc sun"><span class="dn">18</span></div>
-        <div class="dc"><span class="dn">19</span></div>
-        <div class="dc"><span class="dn">20</span></div>
-        <div class="dc"><span class="dn">21</span></div>
-        <div class="dc"><span class="dn">22</span></div>
-        <div class="dc"><span class="dn">23</span></div>
-        <div class="dc sat"><span class="dn">24</span></div>
-        <div class="dc sun"><span class="dn">25</span></div>
-        <div class="dc"><span class="dn">26</span></div>
-        <div class="dc"><span class="dn">27</span></div>
-        <div class="dc"><span class="dn">28</span></div>
-        <div class="dc"><span class="dn">29</span></div>
-        <div class="dc"><span class="dn">30</span></div>
-        <div class="dc sat"><span class="dn">31</span></div>
-          </div>
-        </div>
-        <div class="cp" id="cp02">
-          <div class="cp-head">2026년 2월</div>
-          <div class="cal-grid">
-            <div class="dh sun">일</div><div class="dh">월</div><div class="dh">화</div>
-            <div class="dh">수</div><div class="dh">목</div><div class="dh">금</div><div class="dh sat">토</div>
-        <div class="dc sun"><span class="dn">1</span></div>
-        <div class="dc"><span class="dn">2</span></div>
-        <div class="dc"><span class="dn">3</span></div>
-        <div class="dc"><span class="dn">4</span></div>
-        <div class="dc"><span class="dn">5</span></div>
-        <div class="dc"><span class="dn">6</span></div>
-        <div class="dc sat"><span class="dn">7</span></div>
-        <div class="dc sun"><span class="dn">8</span></div>
-        <div class="dc"><span class="dn">9</span></div>
-        <div class="dc"><span class="dn">10</span></div>
-        <div class="dc"><span class="dn">11</span></div>
-        <div class="dc"><span class="dn">12</span></div>
-        <div class="dc"><span class="dn">13</span></div>
-        <div class="dc sat"><span class="dn">14</span></div>
-        <div class="dc sun"><span class="dn">15</span></div>
-        <div class="dc"><span class="dn">16</span></div>
-        <div class="dc"><span class="dn">17</span></div>
-        <div class="dc"><span class="dn">18</span></div>
-        <div class="dc"><span class="dn">19</span></div>
-        <div class="dc"><span class="dn">20</span></div>
-        <div class="dc sat"><span class="dn">21</span></div>
-        <div class="dc sun"><span class="dn">22</span></div>
-        <div class="dc"><span class="dn">23</span></div>
-        <div class="dc"><span class="dn">24</span></div>
-        <div class="dc"><span class="dn">25</span></div>
-        <div class="dc"><span class="dn">26</span></div>
-        <div class="dc"><span class="dn">27</span></div>
-        <div class="dc sat"><span class="dn">28</span></div>
-          </div>
-        </div>
-        <div class="cp" id="cp03">
-          <div class="cp-head">2026년 3월</div>
-          <div class="cal-grid">
-            <div class="dh sun">일</div><div class="dh">월</div><div class="dh">화</div>
-            <div class="dh">수</div><div class="dh">목</div><div class="dh">금</div><div class="dh sat">토</div>
-        <div class="dc sun"><span class="dn">1</span></div>
-        <div class="dc"><span class="dn">2</span></div>
-        <div class="dc"><span class="dn">3</span></div>
-        <div class="dc"><span class="dn">4</span></div>
-        <div class="dc"><span class="dn">5</span></div>
-        <div class="dc"><span class="dn">6</span></div>
-        <div class="dc sat"><span class="dn">7</span></div>
-        <div class="dc sun"><span class="dn">8</span></div>
-        <div class="dc"><span class="dn">9</span></div>
-        <div class="dc"><span class="dn">10</span></div>
-        <div class="dc"><span class="dn">11</span></div>
-        <div class="dc"><span class="dn">12</span></div>
-        <div class="dc"><span class="dn">13</span></div>
-        <div class="dc sat"><span class="dn">14</span></div>
-        <div class="dc sun"><span class="dn">15</span></div>
-        <div class="dc"><span class="dn">16</span></div>
-        <div class="dc"><span class="dn">17</span></div>
-        <div class="dc"><span class="dn">18</span></div>
-        <div class="dc"><span class="dn">19</span></div>
-        <div class="dc"><span class="dn">20</span></div>
-        <div class="dc sat"><span class="dn">21</span></div>
-        <div class="dc sun"><span class="dn">22</span></div>
-        <div class="dc"><span class="dn">23</span></div>
-        <div class="dc"><span class="dn">24</span></div>
-        <div class="dc"><span class="dn">25</span></div>
-        <div class="dc"><span class="dn">26</span></div>
-        <div class="dc"><span class="dn">27</span></div>
-        <div class="dc sat"><span class="dn">28</span></div>
-        <div class="dc sun"><span class="dn">29</span></div>
-        <div class="dc"><span class="dn">30</span></div>
-        <div class="dc"><span class="dn">31</span></div>
-          </div>
-        </div>
-        <div class="cp" id="cp04">
-          <div class="cp-head">2026년 4월</div>
-          <div class="cal-grid">
-            <div class="dh sun">일</div><div class="dh">월</div><div class="dh">화</div>
-            <div class="dh">수</div><div class="dh">목</div><div class="dh">금</div><div class="dh sat">토</div>
-        <div class="dc-empty"></div>
-        <div class="dc-empty"></div>
-        <div class="dc-empty"></div>
-        <div class="dc"><span class="dn">1</span><span class="ev 전">4월 북큐레이션</span></div>
-        <div class="dc"><span class="dn">2</span></div>
-        <div class="dc"><span class="dn">3</span><span class="ev 전">4월 북큐레이션</span></div>
-        <div class="dc sat"><span class="dn">4</span></div>
-        <div class="dc sun"><span class="dn">5</span></div>
-        <div class="dc hol"><span class="dn">6</span><span class="ev 휴">정기휴관일</span></div>
-        <div class="dc"><span class="dn">7</span></div>
-        <div class="dc"><span class="dn">8</span></div>
-        <div class="dc"><span class="dn">9</span></div>
-        <div class="dc"><span class="dn">10</span><span class="ev 행">숙련기술인과의 만남</span></div>
-        <div class="dc sat"><span class="dn">11</span></div>
-        <div class="dc sun"><span class="dn">12</span></div>
-        <div class="dc hol"><span class="dn">13</span><span class="ev 휴">정기휴관일</span></div>
-        <div class="dc"><span class="dn">14</span></div>
-        <div class="dc"><span class="dn">15</span></div>
-        <div class="dc"><span class="dn">16</span></div>
-        <div class="dc"><span class="dn">17</span><span class="ev 행">책읽는 숙련광장</span><span class="ev 행">기능 책마당</span><span class="ev 전">4월 북큐레이션</span></div>
-        <div class="dc sat"><span class="dn">18</span></div>
-        <div class="dc sun"><span class="dn">19</span></div>
-        <div class="dc hol"><span class="dn">20</span><span class="ev 휴">정기휴관일</span></div>
-        <div class="dc"><span class="dn">21</span><span class="ev 행">숙련기술 책마당</span><span class="ev 행">책읽는 숙련광장</span><span class="ev 전">4월 북큐레이션</span></div>
-        <div class="dc"><span class="dn">22</span></div>
-        <div class="dc"><span class="dn">23</span></div>
-        <div class="dc"><span class="dn">24</span></div>
-        <div class="dc sat"><span class="dn">25</span></div>
-        <div class="dc sun"><span class="dn">26</span></div>
-        <div class="dc"><span class="dn">27</span></div>
-        <div class="dc"><span class="dn">28</span></div>
-        <div class="dc"><span class="dn">29</span></div>
-        <div class="dc"><span class="dn">30</span></div>
-          </div>
-        </div>
-        <div class="cp" id="cp05">
-          <div class="cp-head">2026년 5월</div>
-          <div class="cal-grid">
-            <div class="dh sun">일</div><div class="dh">월</div><div class="dh">화</div>
-            <div class="dh">수</div><div class="dh">목</div><div class="dh">금</div><div class="dh sat">토</div>
-        <div class="dc-empty"></div>
-        <div class="dc-empty"></div>
-        <div class="dc-empty"></div>
-        <div class="dc-empty"></div>
-        <div class="dc-empty"></div>
-        <div class="dc"><span class="dn">1</span></div>
-        <div class="dc sat"><span class="dn">2</span></div>
-        <div class="dc sun"><span class="dn">3</span></div>
-        <div class="dc"><span class="dn">4</span></div>
-        <div class="dc"><span class="dn">5</span></div>
-        <div class="dc"><span class="dn">6</span></div>
-        <div class="dc"><span class="dn">7</span></div>
-        <div class="dc"><span class="dn">8</span></div>
-        <div class="dc sat"><span class="dn">9</span></div>
-        <div class="dc sun"><span class="dn">10</span></div>
-        <div class="dc"><span class="dn">11</span></div>
-        <div class="dc"><span class="dn">12</span></div>
-        <div class="dc"><span class="dn">13</span></div>
-        <div class="dc"><span class="dn">14</span></div>
-        <div class="dc"><span class="dn">15</span></div>
-        <div class="dc sat"><span class="dn">16</span></div>
-        <div class="dc sun"><span class="dn">17</span></div>
-        <div class="dc"><span class="dn">18</span></div>
-        <div class="dc"><span class="dn">19</span></div>
-        <div class="dc"><span class="dn">20</span></div>
-        <div class="dc"><span class="dn">21</span></div>
-        <div class="dc"><span class="dn">22</span></div>
-        <div class="dc sat"><span class="dn">23</span></div>
-        <div class="dc sun"><span class="dn">24</span></div>
-        <div class="dc"><span class="dn">25</span></div>
-        <div class="dc"><span class="dn">26</span></div>
-        <div class="dc"><span class="dn">27</span></div>
-        <div class="dc"><span class="dn">28</span></div>
-        <div class="dc"><span class="dn">29</span></div>
-        <div class="dc sat"><span class="dn">30</span></div>
-        <div class="dc sun"><span class="dn">31</span></div>
-          </div>
-        </div>
-        <div class="cp" id="cp06">
-          <div class="cp-head">2026년 6월</div>
-          <div class="cal-grid">
-            <div class="dh sun">일</div><div class="dh">월</div><div class="dh">화</div>
-            <div class="dh">수</div><div class="dh">목</div><div class="dh">금</div><div class="dh sat">토</div>
-        <div class="dc-empty"></div>
-        <div class="dc"><span class="dn">1</span></div>
-        <div class="dc"><span class="dn">2</span></div>
-        <div class="dc"><span class="dn">3</span></div>
-        <div class="dc"><span class="dn">4</span></div>
-        <div class="dc"><span class="dn">5</span></div>
-        <div class="dc sat"><span class="dn">6</span></div>
-        <div class="dc sun"><span class="dn">7</span></div>
-        <div class="dc"><span class="dn">8</span></div>
-        <div class="dc"><span class="dn">9</span></div>
-        <div class="dc"><span class="dn">10</span></div>
-        <div class="dc"><span class="dn">11</span></div>
-        <div class="dc"><span class="dn">12</span></div>
-        <div class="dc sat"><span class="dn">13</span></div>
-        <div class="dc sun"><span class="dn">14</span></div>
-        <div class="dc"><span class="dn">15</span></div>
-        <div class="dc"><span class="dn">16</span></div>
-        <div class="dc"><span class="dn">17</span></div>
-        <div class="dc"><span class="dn">18</span></div>
-        <div class="dc"><span class="dn">19</span></div>
-        <div class="dc sat"><span class="dn">20</span></div>
-        <div class="dc sun"><span class="dn">21</span></div>
-        <div class="dc"><span class="dn">22</span></div>
-        <div class="dc"><span class="dn">23</span></div>
-        <div class="dc"><span class="dn">24</span></div>
-        <div class="dc"><span class="dn">25</span></div>
-        <div class="dc"><span class="dn">26</span></div>
-        <div class="dc sat"><span class="dn">27</span></div>
-        <div class="dc sun"><span class="dn">28</span></div>
-        <div class="dc"><span class="dn">29</span></div>
-        <div class="dc"><span class="dn">30</span></div>
-          </div>
-        </div>
-        <div class="cp" id="cp07">
-          <div class="cp-head">2026년 7월</div>
-          <div class="cal-grid">
-            <div class="dh sun">일</div><div class="dh">월</div><div class="dh">화</div>
-            <div class="dh">수</div><div class="dh">목</div><div class="dh">금</div><div class="dh sat">토</div>
-        <div class="dc-empty"></div>
-        <div class="dc-empty"></div>
-        <div class="dc-empty"></div>
-        <div class="dc"><span class="dn">1</span></div>
-        <div class="dc"><span class="dn">2</span></div>
-        <div class="dc"><span class="dn">3</span></div>
-        <div class="dc sat"><span class="dn">4</span></div>
-        <div class="dc sun"><span class="dn">5</span></div>
-        <div class="dc"><span class="dn">6</span></div>
-        <div class="dc"><span class="dn">7</span></div>
-        <div class="dc"><span class="dn">8</span></div>
-        <div class="dc"><span class="dn">9</span></div>
-        <div class="dc"><span class="dn">10</span></div>
-        <div class="dc sat"><span class="dn">11</span></div>
-        <div class="dc sun"><span class="dn">12</span></div>
-        <div class="dc"><span class="dn">13</span></div>
-        <div class="dc"><span class="dn">14</span></div>
-        <div class="dc"><span class="dn">15</span></div>
-        <div class="dc"><span class="dn">16</span></div>
-        <div class="dc"><span class="dn">17</span></div>
-        <div class="dc sat"><span class="dn">18</span></div>
-        <div class="dc sun"><span class="dn">19</span></div>
-        <div class="dc"><span class="dn">20</span></div>
-        <div class="dc"><span class="dn">21</span></div>
-        <div class="dc"><span class="dn">22</span></div>
-        <div class="dc"><span class="dn">23</span></div>
-        <div class="dc"><span class="dn">24</span></div>
-        <div class="dc sat"><span class="dn">25</span></div>
-        <div class="dc sun"><span class="dn">26</span></div>
-        <div class="dc"><span class="dn">27</span></div>
-        <div class="dc"><span class="dn">28</span></div>
-        <div class="dc"><span class="dn">29</span></div>
-        <div class="dc"><span class="dn">30</span></div>
-        <div class="dc"><span class="dn">31</span></div>
-          </div>
-        </div>
-        <div class="cp" id="cp08">
-          <div class="cp-head">2026년 8월</div>
-          <div class="cal-grid">
-            <div class="dh sun">일</div><div class="dh">월</div><div class="dh">화</div>
-            <div class="dh">수</div><div class="dh">목</div><div class="dh">금</div><div class="dh sat">토</div>
-        <div class="dc-empty"></div>
-        <div class="dc-empty"></div>
-        <div class="dc-empty"></div>
-        <div class="dc-empty"></div>
-        <div class="dc-empty"></div>
-        <div class="dc-empty"></div>
-        <div class="dc sat"><span class="dn">1</span></div>
-        <div class="dc sun"><span class="dn">2</span></div>
-        <div class="dc"><span class="dn">3</span></div>
-        <div class="dc"><span class="dn">4</span></div>
-        <div class="dc"><span class="dn">5</span></div>
-        <div class="dc"><span class="dn">6</span></div>
-        <div class="dc"><span class="dn">7</span></div>
-        <div class="dc sat"><span class="dn">8</span></div>
-        <div class="dc sun"><span class="dn">9</span></div>
-        <div class="dc"><span class="dn">10</span></div>
-        <div class="dc"><span class="dn">11</span></div>
-        <div class="dc"><span class="dn">12</span></div>
-        <div class="dc"><span class="dn">13</span></div>
-        <div class="dc"><span class="dn">14</span></div>
-        <div class="dc sat"><span class="dn">15</span></div>
-        <div class="dc sun"><span class="dn">16</span></div>
-        <div class="dc"><span class="dn">17</span></div>
-        <div class="dc"><span class="dn">18</span></div>
-        <div class="dc"><span class="dn">19</span></div>
-        <div class="dc"><span class="dn">20</span></div>
-        <div class="dc"><span class="dn">21</span></div>
-        <div class="dc sat"><span class="dn">22</span></div>
-        <div class="dc sun"><span class="dn">23</span></div>
-        <div class="dc"><span class="dn">24</span></div>
-        <div class="dc"><span class="dn">25</span></div>
-        <div class="dc"><span class="dn">26</span></div>
-        <div class="dc"><span class="dn">27</span></div>
-        <div class="dc"><span class="dn">28</span></div>
-        <div class="dc sat"><span class="dn">29</span></div>
-        <div class="dc sun"><span class="dn">30</span></div>
-        <div class="dc"><span class="dn">31</span></div>
-          </div>
-        </div>
-        <div class="cp" id="cp09">
-          <div class="cp-head">2026년 9월</div>
-          <div class="cal-grid">
-            <div class="dh sun">일</div><div class="dh">월</div><div class="dh">화</div>
-            <div class="dh">수</div><div class="dh">목</div><div class="dh">금</div><div class="dh sat">토</div>
-        <div class="dc-empty"></div>
-        <div class="dc-empty"></div>
-        <div class="dc"><span class="dn">1</span></div>
-        <div class="dc"><span class="dn">2</span></div>
-        <div class="dc"><span class="dn">3</span></div>
-        <div class="dc"><span class="dn">4</span></div>
-        <div class="dc sat"><span class="dn">5</span></div>
-        <div class="dc sun"><span class="dn">6</span></div>
-        <div class="dc"><span class="dn">7</span></div>
-        <div class="dc"><span class="dn">8</span></div>
-        <div class="dc"><span class="dn">9</span></div>
-        <div class="dc"><span class="dn">10</span></div>
-        <div class="dc"><span class="dn">11</span></div>
-        <div class="dc sat"><span class="dn">12</span></div>
-        <div class="dc sun"><span class="dn">13</span></div>
-        <div class="dc"><span class="dn">14</span></div>
-        <div class="dc"><span class="dn">15</span></div>
-        <div class="dc"><span class="dn">16</span></div>
-        <div class="dc"><span class="dn">17</span></div>
-        <div class="dc"><span class="dn">18</span></div>
-        <div class="dc sat"><span class="dn">19</span></div>
-        <div class="dc sun"><span class="dn">20</span></div>
-        <div class="dc"><span class="dn">21</span></div>
-        <div class="dc"><span class="dn">22</span></div>
-        <div class="dc"><span class="dn">23</span></div>
-        <div class="dc"><span class="dn">24</span></div>
-        <div class="dc"><span class="dn">25</span></div>
-        <div class="dc sat"><span class="dn">26</span></div>
-        <div class="dc sun"><span class="dn">27</span></div>
-        <div class="dc"><span class="dn">28</span></div>
-        <div class="dc"><span class="dn">29</span></div>
-        <div class="dc"><span class="dn">30</span></div>
-          </div>
-        </div>
-        <div class="cp" id="cp10">
-          <div class="cp-head">2026년 10월</div>
-          <div class="cal-grid">
-            <div class="dh sun">일</div><div class="dh">월</div><div class="dh">화</div>
-            <div class="dh">수</div><div class="dh">목</div><div class="dh">금</div><div class="dh sat">토</div>
-        <div class="dc-empty"></div>
-        <div class="dc-empty"></div>
-        <div class="dc-empty"></div>
-        <div class="dc-empty"></div>
-        <div class="dc"><span class="dn">1</span></div>
-        <div class="dc"><span class="dn">2</span></div>
-        <div class="dc sat"><span class="dn">3</span></div>
-        <div class="dc sun"><span class="dn">4</span></div>
-        <div class="dc"><span class="dn">5</span></div>
-        <div class="dc"><span class="dn">6</span></div>
-        <div class="dc"><span class="dn">7</span></div>
-        <div class="dc"><span class="dn">8</span></div>
-        <div class="dc"><span class="dn">9</span></div>
-        <div class="dc sat"><span class="dn">10</span></div>
-        <div class="dc sun"><span class="dn">11</span></div>
-        <div class="dc"><span class="dn">12</span></div>
-        <div class="dc"><span class="dn">13</span></div>
-        <div class="dc"><span class="dn">14</span></div>
-        <div class="dc"><span class="dn">15</span></div>
-        <div class="dc"><span class="dn">16</span></div>
-        <div class="dc sat"><span class="dn">17</span></div>
-        <div class="dc sun"><span class="dn">18</span></div>
-        <div class="dc"><span class="dn">19</span></div>
-        <div class="dc"><span class="dn">20</span></div>
-        <div class="dc"><span class="dn">21</span></div>
-        <div class="dc"><span class="dn">22</span></div>
-        <div class="dc"><span class="dn">23</span></div>
-        <div class="dc sat"><span class="dn">24</span></div>
-        <div class="dc sun"><span class="dn">25</span></div>
-        <div class="dc"><span class="dn">26</span></div>
-        <div class="dc"><span class="dn">27</span></div>
-        <div class="dc"><span class="dn">28</span></div>
-        <div class="dc"><span class="dn">29</span></div>
-        <div class="dc"><span class="dn">30</span></div>
-        <div class="dc sat"><span class="dn">31</span></div>
-          </div>
-        </div>
-        <div class="cp" id="cp11">
-          <div class="cp-head">2026년 11월</div>
-          <div class="cal-grid">
-            <div class="dh sun">일</div><div class="dh">월</div><div class="dh">화</div>
-            <div class="dh">수</div><div class="dh">목</div><div class="dh">금</div><div class="dh sat">토</div>
-        <div class="dc sun"><span class="dn">1</span></div>
-        <div class="dc"><span class="dn">2</span></div>
-        <div class="dc"><span class="dn">3</span></div>
-        <div class="dc"><span class="dn">4</span></div>
-        <div class="dc"><span class="dn">5</span></div>
-        <div class="dc"><span class="dn">6</span></div>
-        <div class="dc sat"><span class="dn">7</span></div>
-        <div class="dc sun"><span class="dn">8</span></div>
-        <div class="dc"><span class="dn">9</span></div>
-        <div class="dc"><span class="dn">10</span></div>
-        <div class="dc"><span class="dn">11</span></div>
-        <div class="dc"><span class="dn">12</span></div>
-        <div class="dc"><span class="dn">13</span></div>
-        <div class="dc sat"><span class="dn">14</span></div>
-        <div class="dc sun"><span class="dn">15</span></div>
-        <div class="dc"><span class="dn">16</span></div>
-        <div class="dc"><span class="dn">17</span></div>
-        <div class="dc"><span class="dn">18</span></div>
-        <div class="dc"><span class="dn">19</span></div>
-        <div class="dc"><span class="dn">20</span></div>
-        <div class="dc sat"><span class="dn">21</span></div>
-        <div class="dc sun"><span class="dn">22</span></div>
-        <div class="dc"><span class="dn">23</span></div>
-        <div class="dc"><span class="dn">24</span></div>
-        <div class="dc"><span class="dn">25</span></div>
-        <div class="dc"><span class="dn">26</span></div>
-        <div class="dc"><span class="dn">27</span></div>
-        <div class="dc sat"><span class="dn">28</span></div>
-        <div class="dc sun"><span class="dn">29</span></div>
-        <div class="dc"><span class="dn">30</span></div>
-          </div>
-        </div>
-        <div class="cp" id="cp12">
-          <div class="cp-head">2026년 12월</div>
-          <div class="cal-grid">
-            <div class="dh sun">일</div><div class="dh">월</div><div class="dh">화</div>
-            <div class="dh">수</div><div class="dh">목</div><div class="dh">금</div><div class="dh sat">토</div>
-        <div class="dc-empty"></div>
-        <div class="dc-empty"></div>
-        <div class="dc"><span class="dn">1</span></div>
-        <div class="dc"><span class="dn">2</span></div>
-        <div class="dc"><span class="dn">3</span></div>
-        <div class="dc"><span class="dn">4</span></div>
-        <div class="dc sat"><span class="dn">5</span></div>
-        <div class="dc sun"><span class="dn">6</span></div>
-        <div class="dc"><span class="dn">7</span></div>
-        <div class="dc"><span class="dn">8</span></div>
-        <div class="dc"><span class="dn">9</span></div>
-        <div class="dc"><span class="dn">10</span></div>
-        <div class="dc"><span class="dn">11</span></div>
-        <div class="dc sat"><span class="dn">12</span></div>
-        <div class="dc sun"><span class="dn">13</span></div>
-        <div class="dc"><span class="dn">14</span></div>
-        <div class="dc"><span class="dn">15</span></div>
-        <div class="dc"><span class="dn">16</span></div>
-        <div class="dc"><span class="dn">17</span></div>
-        <div class="dc"><span class="dn">18</span></div>
-        <div class="dc sat"><span class="dn">19</span></div>
-        <div class="dc sun"><span class="dn">20</span></div>
-        <div class="dc"><span class="dn">21</span></div>
-        <div class="dc"><span class="dn">22</span></div>
-        <div class="dc"><span class="dn">23</span></div>
-        <div class="dc"><span class="dn">24</span></div>
-        <div class="dc"><span class="dn">25</span></div>
-        <div class="dc sat"><span class="dn">26</span></div>
-        <div class="dc sun"><span class="dn">27</span></div>
-        <div class="dc"><span class="dn">28</span></div>
-        <div class="dc"><span class="dn">29</span></div>
-        <div class="dc"><span class="dn">30</span></div>
-        <div class="dc"><span class="dn">31</span></div>
-          </div>
-        </div>
-            </div>
-            <div class="cal-legend">
-                <span><span class="leg-dot 행"></span>행사</span>
-                <span><span class="leg-dot 전"></span>전시</span>
-                <span><span class="leg-dot 휴"></span>휴관</span>
-            </div>
-        </section>
+                 <!-- 행사달력 -->
+    <section id="calendar">
+        <h2 class="section-title">행사달력</h2>
+		<div class="section-inner">
+			<!-- 달력 헤더 -->
+			<div class="cal-header f jsb aic">
+				<h3>2026년 4월</h3>
+				<div class="cal-controls">
+					<select>
+						<option>2025년</option>
+						<option selected>2026년</option>
+						<option>2027년</option>
+					</select>
+					<select>
+						<option>1월</option>
+						<option>2월</option>
+						<option>3월</option>
+						<option selected>4월</option>
+						<option>5월</option>
+						<option>6월</option>
+						<option>7월</option>
+						<option>8월</option>
+						<option>9월</option>
+						<option>10월</option>
+						<option>11월</option>
+						<option>12월</option>
+					</select>
+				</div>
+			</div>
+
+			<!-- 달력 내용 -->
+			<div class="cal-body f-c">
+				<div class="cal-row">
+					<div><span>일</span></div>
+					<div><span>월</span></div>
+					<div><span>화</span></div>
+					<div><span>수</span></div>
+					<div><span>목</span></div>
+					<div><span>금</span></div>
+					<div><span>토</span></div>
+				</div>
+				<div class="cal-row">
+					<div><span class="cal-non">29</span></div>
+					<div><span class="cal-non">30</span></div>
+					<div><span class="cal-non">31</span></div>
+					<div><span>1</span><span class="event blue">전시 4월 북큐레이션</span></div>
+					<div><span>2</span></div>
+					<div><span>3</span><span class="event blue">전시 4월 북큐레이션</span></div>
+					<div><span>4</span></div>
+				</div>
+				<div class="cal-row">
+					<div><span>5</span></div>
+					<div><span>6</span><span class="event red">휴관 정기휴관일</span></div>
+					<div><span>7</span></div>
+					<div><span>8</span></div>
+					<div><span>9</span></div>
+					<div><span>10</span><span class="event">숙련기술인과의 만남</span></div>
+					<div><span>11</span></div>
+				</div>
+				<div class="cal-row">
+					<div><span>12</span></div>
+					<div><span>13</span><span class="event red">휴관정기휴관일</span></div>
+					<div><span>14</span></div>
+					<div><span>15</span></div>
+					<div><span>16</span></div>
+					<div>
+						<span>17</span>
+						<span class="event green">행사 책읽는 숙련광장</span>
+						<span class="event green">행사 기능 책마당</span>
+						<span class="event green">행사 책읽는 숙련기술</span>
+						<span class="event blue">전시 4월 북큐레이션</span>
+					</div>
+					<div><span>18</span></div>
+				</div>
+				<div class="cal-row">
+					<div><span>19</span></div>
+					<div><span>20</span><span class="event red">휴관 정기휴관일</span></div>
+					<div>
+						<span>21</span>
+						<span class="event green">행사 숙련기술 책마당</span>
+						<span class="event green">행사 책읽는 맑은냇가</span>
+						<span class="event green">행사 책읽는 숙련광장</span>
+						<span class="event blue">전시 4월 북큐레이션</span>
+					</div>
+					<div><span>22</span></div>
+					<div><span>23</span></div>
+					<div><span>24</span></div>
+					<div><span>25</span></div>
+				</div>
+				<div class="cal-row">
+					<div><span>26</span></div>
+					<div><span>27</span></div>
+					<div><span>28</span></div>
+					<div><span>29</span></div>
+					<div><span>30</span></div>
+					<div><span class="cal-non">1</span></div>
+					<div><span class="cal-non">2</span></div>
+				</div>
+			</div>
+		</div>
+    </section>
+        
 
 </main>
     </div>
