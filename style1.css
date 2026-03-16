@@ -530,10 +530,10 @@ input[name="tab"] { display: none; }
 .book-section {
     margin: 0 auto;
     width: 100%;
-    background-color: #f7f3ee;
-    padding: 80px 20px 160px;
-    position: relative;
+    height: 500px;
+    background-color: #d9d9d9;
 }
+
 .book-section > h2 {
     text-align: center;
     font-size: 26px;
@@ -547,7 +547,7 @@ input[name="tab"] { display: none; }
 ════════════════════════════════ */
 .cal-section {
     background: var(--bg-beige);
-    padding: 60px 20px 80px;
+    padding: 80px 20px;
 }
 
 /* radio 숨김 */
@@ -612,34 +612,32 @@ input[name="tab"] { display: none; }
 }
 
 /* 기본: 4월 표시 */
-#cp04 { display: block; }
-.cal-nav label[for="r04"] { background: var(--point-gold); color: #fff; border-color: var(--point-gold); }
+#r04:checked ~ .cal-section .cp#cp04 { display: block; }
+#r04:checked ~ .cal-section .cal-nav label[for="r04"] { background: var(--point-gold); color: #fff; border-color: var(--point-gold); }
 
 /* :checked 규칙 (1~12월) */
-#r01:checked ~ * #cp01 { display: block; }
-#r01:checked ~ * .cal-nav label[for="r01"] { background: var(--point-gold); color: #fff; border-color: var(--point-gold); }
-#r02:checked ~ * #cp02 { display: block; }
-#r02:checked ~ * .cal-nav label[for="r02"] { background: var(--point-gold); color: #fff; border-color: var(--point-gold); }
-#r03:checked ~ * #cp03 { display: block; }
-#r03:checked ~ * .cal-nav label[for="r03"] { background: var(--point-gold); color: #fff; border-color: var(--point-gold); }
-#r04:checked ~ * #cp04 { display: block; }
-#r04:checked ~ * .cal-nav label[for="r04"] { background: var(--point-gold); color: #fff; border-color: var(--point-gold); }
-#r05:checked ~ * #cp05 { display: block; }
-#r05:checked ~ * .cal-nav label[for="r05"] { background: var(--point-gold); color: #fff; border-color: var(--point-gold); }
-#r06:checked ~ * #cp06 { display: block; }
-#r06:checked ~ * .cal-nav label[for="r06"] { background: var(--point-gold); color: #fff; border-color: var(--point-gold); }
-#r07:checked ~ * #cp07 { display: block; }
-#r07:checked ~ * .cal-nav label[for="r07"] { background: var(--point-gold); color: #fff; border-color: var(--point-gold); }
-#r08:checked ~ * #cp08 { display: block; }
-#r08:checked ~ * .cal-nav label[for="r08"] { background: var(--point-gold); color: #fff; border-color: var(--point-gold); }
-#r09:checked ~ * #cp09 { display: block; }
-#r09:checked ~ * .cal-nav label[for="r09"] { background: var(--point-gold); color: #fff; border-color: var(--point-gold); }
-#r10:checked ~ * #cp10 { display: block; }
-#r10:checked ~ * .cal-nav label[for="r10"] { background: var(--point-gold); color: #fff; border-color: var(--point-gold); }
-#r11:checked ~ * #cp11 { display: block; }
-#r11:checked ~ * .cal-nav label[for="r11"] { background: var(--point-gold); color: #fff; border-color: var(--point-gold); }
-#r12:checked ~ * #cp12 { display: block; }
-#r12:checked ~ * .cal-nav label[for="r12"] { background: var(--point-gold); color: #fff; border-color: var(--point-gold); }
+#r01:checked ~ .cal-section .cp#cp01 { display: block; }
+#r01:checked ~ .cal-section .cal-nav label[for="r01"] { background: var(--point-gold); color: #fff; border-color: var(--point-gold); }
+#r02:checked ~ .cal-section .cp#cp02 { display: block; }
+#r02:checked ~ .cal-section .cal-nav label[for="r02"] { background: var(--point-gold); color: #fff; border-color: var(--point-gold); }
+#r03:checked ~ .cal-section .cp#cp03 { display: block; }
+#r03:checked ~ .cal-section .cal-nav label[for="r03"] { background: var(--point-gold); color: #fff; border-color: var(--point-gold); }
+#r05:checked ~ .cal-section .cp#cp05 { display: block; }
+#r05:checked ~ .cal-section .cal-nav label[for="r05"] { background: var(--point-gold); color: #fff; border-color: var(--point-gold); }
+#r06:checked ~ .cal-section .cp#cp06 { display: block; }
+#r06:checked ~ .cal-section .cal-nav label[for="r06"] { background: var(--point-gold); color: #fff; border-color: var(--point-gold); }
+#r07:checked ~ .cal-section .cp#cp07 { display: block; }
+#r07:checked ~ .cal-section .cal-nav label[for="r07"] { background: var(--point-gold); color: #fff; border-color: var(--point-gold); }
+#r08:checked ~ .cal-section .cp#cp08 { display: block; }
+#r08:checked ~ .cal-section .cal-nav label[for="r08"] { background: var(--point-gold); color: #fff; border-color: var(--point-gold); }
+#r09:checked ~ .cal-section .cp#cp09 { display: block; }
+#r09:checked ~ .cal-section .cal-nav label[for="r09"] { background: var(--point-gold); color: #fff; border-color: var(--point-gold); }
+#r10:checked ~ .cal-section .cp#cp10 { display: block; }
+#r10:checked ~ .cal-section .cal-nav label[for="r10"] { background: var(--point-gold); color: #fff; border-color: var(--point-gold); }
+#r11:checked ~ .cal-section .cp#cp11 { display: block; }
+#r11:checked ~ .cal-section .cal-nav label[for="r11"] { background: var(--point-gold); color: #fff; border-color: var(--point-gold); }
+#r12:checked ~ .cal-section .cp#cp12 { display: block; }
+#r12:checked ~ .cal-section .cal-nav label[for="r12"] { background: var(--point-gold); color: #fff; border-color: var(--point-gold); }
 
 /* 달력 헤더 */
 .cp .cp-head {
