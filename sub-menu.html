@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="style.css">
+    <title>도서관 소개 – 스킬스북도서관</title>
+</head>
+<body>
+
+    <input type="checkbox" id="login-trigger" class="login-checkbox">
+    <div class="login-overlay">
+        <label for="login-trigger" class="login-bg"></label>
+        <div class="login-window">
+            <div class="login-header">
+                <h3>로그인</h3>
+                <label for="login-trigger" class="login-x">✕</label>
+            </div>
+            <div class="login-body">
+                <div class="login-field">
+                    <label class="login-label">아이디</label>
+                    <input type="text" class="login-input" placeholder="아이디를 입력하세요">
+                </div>
+                <div class="login-field">
+                    <label class="login-label">비밀번호</label>
+                    <input type="password" class="login-input" placeholder="비밀번호를 입력하세요">
+                </div>
+                <button class="login-btn">Login</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper">
+
+        <header class="header">
+            <div class="container">
+                <h1 class="logo">
+                    <a href="index.html">
+                        <div class="logo-symbol">
+                            <span class="book-page left"></span>
+                            <span class="book-page right"></span>
+                            <span class="gear"></span>
+                        </div>
+                        <span class="logo-text">스킬스북도서관</span>
+                    </a>
+                </h1>
+                <nav class="nav">
+                    <ul class="main-menu">
+                        <li class="menu-list">
+                            <input type="checkbox" id="menu1" class="menu-trigger">
+                            <label for="menu1" class="menu-item">도서관소개 <span class="icon"></span></label>
+                            <ul class="sub-menu">
+                                <li><a href="about.html" class="active">도서관소개</a></li>
+                                <li><a href="#">도서관현황</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-list">
+                            <input type="checkbox" id="menu2" class="menu-trigger">
+                            <label for="menu2" class="menu-item">도서자료실 <span class="icon"></span></label>
+                            <ul class="sub-menu">
+                                <li><a href="#">자료실</a></li>
+                                <li><a href="#">열람실예약</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-list">
+                            <input type="checkbox" id="menu3" class="menu-trigger">
+                            <label for="menu3" class="menu-item">회원서비스 <span class="icon"></span></label>
+                            <ul class="sub-menu">
+                                <li><a href="#">회원가입</a></li>
+                                <li><a href="#">마이페이지</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#" class="menu-item">신규도서등록</a></li>
+                        <li><a href="#" class="menu-item">대출/열람실</a></li>
+                    </ul>
+                </nav>
+                <div class="user-menu">
+                    <label for="login-trigger" class="login-toggle">로그인</label>
+                    <span class="bar"></span>
+                    <a href="#">회원가입</a>
+                </div>
+            </div>
+        </header>
+
+        <section class="sub-hero">
+            <img src="/B-Module/images/images (44).jpg" alt="도서관 소개">
+            <div class="sub-hero-text">
+                <span class="eyebrow">SKILLS BOOK LIBRARY</span>
+                <h1>도서관 소개</h1>
+                <p class="breadcrumb">
+                    <a href="index.html">홈</a> &rsaquo; 도서관소개 &rsaquo;
+                    <strong style="color:#fff">도서관소개</strong>
+                </p>
+            </div>
+        </section>
+
+        <nav class="sub-nav">
+            <ul>
+                <li><a href="about.html" class="active">도서관소개</a></li>
+                <li><a href="#">도서관현황</a></li>
+                <li><a href="#">찾아오시는 길</a></li>
+            </ul>
+        </nav>
+
+        <div class="sub-container">
+
+            <!-- 설립 목적 -->
+            <section class="purpose-section">
+                <div class="purpose-img-wrap">
+                    <img src="/B-Module/images/images (51).jpg" alt="스킬스북도서관 내부">
+                </div>
+                <div class="purpose-text">
+                    <span class="section-eyebrow">MISSION &amp; PURPOSE</span>
+                    <h2>설립 목적 및<br>사업 소개</h2>
+                    <div class="accent-bar"></div>
+                    <p>
+                        국민에게 산업에 필요한 숙련기술의 습득을 장려하고 숙련기술의
+                        향상을 촉진하는 동시에 숙련기술자에 대한 사회적 인식을 높임으로써
+                        숙련기술자의 경제적·사회적 지위를 향상시키고 산업경쟁력을 높이는
+                        것을 목적으로 합니다.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 통계 배너 -->
+            <div class="stats-banner">
+                <div class="stat-item">
+                    <div class="stat-num">10+</div>
+                    <div class="stat-label">설립 연도</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">50,000+</div>
+                    <div class="stat-label">보유 도서</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">365</div>
+                    <div class="stat-label">연간 운영일</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">8</div>
+                    <div class="stat-label">분관 수</div>
+                </div>
+            </div>
+
+            <!-- 연혁 타임라인 -->
+            <section class="history-section">
+                <span class="section-eyebrow">HISTORY</span>
+                <h2>도서관 역사</h2>
+                <div class="accent-bar"></div>
+
+                <div class="timeline">
+
+                    <!-- 홀수: 왼쪽 / 짝수: 오른쪽 -->
+
+                    <!-- 2024 — 왼쪽 -->
+                    <div class="tl-year-group">
+                        <div class="tl-events">
+                            <div class="tl-event">
+                                <div class="tl-date">06. 28</div>
+                                <div class="tl-desc">스킬스북도서관 재개관 (SOC리모델링)</div>
+                            </div>
+                        </div>
+                        <div class="tl-year"><span>2024</span></div>
+                        <div class="tl-events"></div>
+                    </div>
+
+                    <!-- 2021 — 오른쪽 -->
+                    <div class="tl-year-group">
+                        <div class="tl-events"></div>
+                        <div class="tl-year"><span>2021</span></div>
+                        <div class="tl-events">
+                            <div class="tl-event">
+                                <div class="tl-date">5월 ~ 8월</div>
+                                <div class="tl-desc">△△도서관 시설개선사업</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2020 — 왼쪽 -->
+                    <div class="tl-year-group">
+                        <div class="tl-events">
+                            <div class="tl-event">
+                                <div class="tl-date">3월 ~ 4월</div>
+                                <div class="tl-desc">△△기적의도서관 도서관 시설 개보수 (담장 교체)</div>
+                            </div>
+                        </div>
+                        <div class="tl-year"><span>2020</span></div>
+                        <div class="tl-events"></div>
+                    </div>
+
+                    <!-- 2019 — 오른쪽 -->
+                    <div class="tl-year-group">
+                        <div class="tl-events"></div>
+                        <div class="tl-year"><span>2019</span></div>
+                        <div class="tl-events">
+                            <div class="tl-event">
+                                <div class="tl-date">08. 28</div>
+                                <div class="tl-desc">◎◎도서관 개관</div>
+                            </div>
+                            <div class="tl-event">
+                                <div class="tl-date">07. 01</div>
+                                <div class="tl-desc">
+                                    조직개편(△△도서관과 신설, 소속 분관 변경)<br>
+                                    △△도서관(기적의 도서관 관리 업무 이관)<br>
+                                    △△도서관(소속 분관 : 서울, 대전, 부산, 광주도서관)<br>
+                                    △△도서관(소속 분관 : 인천, 경기, 강원, 전북, 울산도서관)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2018 — 왼쪽 -->
+                    <div class="tl-year-group">
+                        <div class="tl-events">
+                            <div class="tl-event">
+                                <div class="tl-date">09. 10</div>
+                                <div class="tl-desc">△△도서관 정보팀, 시설팀 신설</div>
+                            </div>
+                            <div class="tl-event">
+                                <div class="tl-date">08. 01</div>
+                                <div class="tl-desc">△△도서관 공공도서관 책밴드(상호대차) 서비스 시행</div>
+                            </div>
+                        </div>
+                        <div class="tl-year"><span>2018</span></div>
+                        <div class="tl-events"></div>
+                    </div>
+
+                    <!-- 2017 — 오른쪽 -->
+                    <div class="tl-year-group">
+                        <div class="tl-events"></div>
+                        <div class="tl-year"><span>2017</span></div>
+                        <div class="tl-events">
+                            <div class="tl-event">
+                                <div class="tl-date">12. 20</div>
+                                <div class="tl-desc">△△도서관 제 6대 관장 취임</div>
+                            </div>
+                            <div class="tl-event">
+                                <div class="tl-date">11. 15</div>
+                                <div class="tl-desc">△△도서관 6차 수탁기관 선정</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2016 — 왼쪽 -->
+                    <div class="tl-year-group">
+                        <div class="tl-events">
+                            <div class="tl-event">
+                                <div class="tl-date">05. 15</div>
+                                <div class="tl-desc">△△도서관 폐관</div>
+                            </div>
+                            <div class="tl-event">
+                                <div class="tl-date">05. 03</div>
+                                <div class="tl-desc">◇◇도서관 개관</div>
+                            </div>
+                        </div>
+                        <div class="tl-year"><span>2016</span></div>
+                        <div class="tl-events"></div>
+                    </div>
+
+                    <!-- 2015 — 오른쪽 -->
+                    <div class="tl-year-group">
+                        <div class="tl-events"></div>
+                        <div class="tl-year"><span>2015</span></div>
+                        <div class="tl-events">
+                            <div class="tl-event">
+                                <div class="tl-date">07. 08</div>
+                                <div class="tl-desc">
+                                    조직개편으로 조직 및 도서관 명칭 변경<br>
+                                    도서관평생학습본부 ← 평생교육원<br>
+                                    △△도서관 도서관정책팀 신설<br>
+                                    △△도서관 ← ○○도서관
+                                </div>
+                            </div>
+                            <div class="tl-event">
+                                <div class="tl-date">06. 02</div>
+                                <div class="tl-desc">□□도서관 통합공공도서관시스템 도입</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2014 — 왼쪽 -->
+                    <div class="tl-year-group">
+                        <div class="tl-events">
+                            <div class="tl-event">
+                                <div class="tl-date">06. 07</div>
+                                <div class="tl-desc">○○도서관 열람실 증축 및 1층 리모델링</div>
+                            </div>
+                            <div class="tl-event">
+                                <div class="tl-date">03. 18</div>
+                                <div class="tl-desc">○○도서관 개관</div>
+                            </div>
+                        </div>
+                        <div class="tl-year"><span>2014</span></div>
+                        <div class="tl-events"></div>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+
+        <footer class="footer">
+            <div class="container footer-container">
+                <div class="footer-info">
+                    <div class="footer-contact">
+                        <span class="contact-label">문의전화안내</span>
+                        <span class="contact-number">1644-8000</span>
+                        <span class="contact-time">운영시간(평일) 09:00~18:00</span>
+                    </div>
+                    <address class="footer-address">
+                        인천시 부평구 무네미로 448번길 77<br>
+                        한국산업인력공단 글로벌숙련기술진흥원
+                    </address>
+                    <p class="copyright">COPYRIGHTⓒ 2016 HRDKOREA</p>
+                </div>
+                <div class="footer-sns">
+                    <a href="#" class="sns-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="sns-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="sns-link"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="sns-link"><i class="fas fa-bold"></i></a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+</body>
+</html>
