@@ -1,0 +1,105 @@
+:root {
+    --bg-light: #FDFCFB;
+    --bg-beige: #F5F2ED;
+    --point-brown: #5D4037;
+    --point-gold: #C5A059;
+    --text-main: #3E2723;
+    --white: #FFFFFF;
+
+    --bk-w: 340px;
+    --bk-h: 460px;
+    --bk-dur: 480ms;
+    --bk-dark: #1a1410;
+    --bk-accent: #c4602a;
+    --bk-muted: #8a7f75;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Pretendard', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+li { list-style: none; }
+a { text-decoration: none; color: inherit; }
+
+/* ─── Header ─── */
+.header {
+    width: 100%;
+    background: var(--white);
+    border-bottom: 3px solid var(--point-brown);
+    position: relative;
+    z-index: 1000;
+}
+.container {
+    width: 1200px;
+    height: 100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.main-menu { display: flex; align-items: center; gap: 10px; }
+.menu-list { position: relative; }
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+.menu-item:hover {
+    background-color: var(--bg-beige);
+    color: var(--point-brown);
+    border-radius: 8px;
+}
+.icon {
+    display: inline-block;
+    width: 14px; height: 14px;
+    margin-left: 8px;
+    position: relative;
+    transition: transform 0.4s;
+}
+.icon::before, .icon::after {
+    content: '';
+    position: absolute;
+    background-color: currentColor;
+    transition: 0.3s;
+}
+.icon::before { width: 100%; height: 2px; top: 6px; left: 0; }
+.icon::after  { width: 2px; height: 100%; top: 0; left: 6px; }
+.menu-trigger:checked + .menu-item .icon { transform: rotate(180deg); }
+.menu-trigger:checked + .menu-item .icon::after { opacity: 0; }
+.sub-menu {
+    position: absolute;
+    top: 65px; left: 50%;
+    width: 160px;
+    transform: translateX(-50%) translateY(15px);
+    background: var(--white);
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 10px 0;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s ease;
+    z-index: 999;
+}
+.menu-trigger:checked ~ .sub-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+.sub-menu li a {
+    display: block;
+    padding: 10px 20px;
+    font-size: 15px;
+    color: var(--text-main);
+    transition: 0.2s;
+}
+.sub-menu li a:hover { background: var(--point-brown); color: var(--white); }
+.menu-trigger { display: none; }
