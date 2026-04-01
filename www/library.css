@@ -1,0 +1,158 @@
+/* ─── 페이지 타이틀 바 ─── */
+.page-title-bar {
+    background: var(--point-brown);
+    padding: 48px 0 40px;
+}
+.page-title-inner {
+    max-width: 1200px;
+    width: 90%;
+    margin: 0 auto;
+}
+.page-sub {
+    display: block;
+    font-size: 11px;
+    letter-spacing: .3em;
+    color: var(--point-gold);
+    margin-bottom: 8px;
+}
+.page-title-bar h2 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 32px;
+    color: #fff;
+    margin-bottom: 8px;
+}
+.page-title-bar p {
+    font-size: 14px;
+    color: rgba(255,255,255,.6);
+}
+
+/* ─── 자료실 섹션 ─── */
+.lib-section {
+    padding: 48px 0 80px;
+    background: var(--bg-beige);
+    min-height: 60vh;
+}
+.lib-container {
+    max-width: 1200px;
+    width: 90%;
+    margin: 0 auto;
+}
+.lib-toolbar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+.lib-count { font-size: 14px; color: #8a7f75; }
+.lib-count strong { color: var(--point-brown); font-weight: 700; }
+
+/* ─── 도서 테이블 ─── */
+.book-table-wrap {
+    background: #fff;
+    border-radius: 14px;
+    overflow-x: auto;
+    box-shadow: 0 4px 24px rgba(93,64,55,.08);
+}
+.book-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    min-width: 900px;
+    table-layout: fixed;
+}
+
+/* 컬럼 너비 */
+.col-img    { width: 90px; }
+.col-title  { width: 220px; }
+.col-author { width: 100px; }
+.col-year   { width: 70px; }
+.col-price  { width: 95px; }
+.col-status { width: 90px; }
+.col-period { width: 170px; }
+.col-btn    { width: 90px; }
+
+.book-table thead tr { background: var(--point-brown); color: #fff; }
+.book-table th {
+    padding: 16px 10px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: .04em;
+    white-space: nowrap;
+}
+.book-table td {
+    padding: 14px 10px;
+    text-align: center;
+    border-bottom: 1px solid #f0ebe6;
+    vertical-align: middle;
+    color: var(--text-main);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.book-table tbody tr:last-child td { border-bottom: none; }
+.book-table tbody tr:hover td { background: #faf7f4; }
+
+/* 도서사진 */
+.book-thumb {
+    width: 52px; height: 68px;
+    object-fit: cover;
+    border-radius: 5px;
+    box-shadow: 2px 3px 10px rgba(0,0,0,.18);
+    display: block; margin: 0 auto;
+}
+.book-thumb-placeholder {
+    width: 52px; height: 68px;
+    background: linear-gradient(135deg, #f0ebe6, #e8e0d8);
+    border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto;
+    color: #c5b5a8; font-size: 20px;
+    box-shadow: 2px 3px 8px rgba(0,0,0,.08);
+}
+
+/* 도서명 */
+.book-title-cell {
+    text-align: left !important;
+    font-weight: 600;
+    padding-left: 6px !important;
+}
+.book-author-cell { color: #8a7f75; }
+
+/* 뱃지 */
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px; font-weight: 700;
+    white-space: nowrap;
+}
+.badge-available {
+    background: rgba(46,125,50,.1);
+    color: #2e7d32;
+    border: 1px solid rgba(46,125,50,.3);
+}
+.badge-loaned {
+    background: rgba(192,57,43,.1);
+    color: #c0392b;
+    border: 1px solid rgba(192,57,43,.3);
+}
+
+/* 대출기간 */
+.loan-period { font-size: 12px; color: #8a7f75; white-space: nowrap; }
+
+/* 대출 버튼 */
+.btn-loan {
+    padding: 7px 14px;
+    background: var(--point-brown);
+    color: #fff; border: none;
+    border-radius: 20px;
+    font-size: 12px; font-weight: 700;
+    cursor: pointer;
+    transition: background .2s, transform .15s;
+    font-family: inherit;
+}
+.btn-loan:hover { background: var(--point-gold); transform: translateY(-1px); }
+.btn-loan:disabled {
+    background: #d0c8c0; color: #a09890;
+    cursor: not-allowed; transform: none;
+}
