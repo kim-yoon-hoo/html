@@ -1,0 +1,212 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+input[type="checkbox"] , input[type="radio"] {
+    display: none;
+}
+
+.wrapper {
+    width: 100%;
+}
+
+body {
+    font-family: "Pretendard" , sans-serif;
+    line-height: 1.6;
+    color: rgb(90, 21, 21);
+    background-color: rgb(245, 243, 243);
+}
+
+.header {
+    width: 100%;
+    position: relative;
+    z-index: 1000;
+    background: white;
+    border-bottom: 3px solid rgb(87, 48, 48);
+} 
+
+.container {
+    width: 1200px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+
+.main-menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.menu-list {
+    position: relative;
+}
+
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: transfrom 0.4s;
+}
+
+.menu-item:hover {
+    border-radius: 8px;
+    color: rgb(209, 81, 81);
+    background-color: white;
+}
+
+
+.icon {
+    width: 14px;
+    height: 14px;
+    transition: 0.3s;
+    background-color: currentColor;
+}
+
+
+.icon::before , .icon::after {
+    content: '';
+    position: absolute;
+}
+
+
+.icon::before {
+    width: 100%;
+    height: 2px;
+    top: 6px;
+    left: 0;
+}
+
+.icon::after {
+    width: 2px;
+    height: 100%;
+    top: 0;
+    left: 6px;
+}
+
+.menu-trigger + .menu-item .icon {
+    transform: rotate(180deg);
+}
+
+.menu-trigger + .menu-item .icon:hover {
+    opacity: 0;
+}
+
+.sub-menu {
+    font-weight: 600;
+    border-radius: 8px;
+    visibility: hidden;
+    align-items: center;
+    top: 65%;
+    display: flex;
+    position: absolute;
+    left: 15px;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    padding: 10px 20px;
+}
+
+.menu-trigger ~ .sub-menu {
+    opacity: 1;
+}
+
+.menu-trigger ~ .sub-menu:hover {
+    visibility: visible;
+}
+
+.util {
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.util:hover {
+    color: rgb(209, 81, 81);
+}
+
+
+/* 자료실 */
+
+
+
+.section-main {
+    width: 1200px;
+    height: 800px;
+    margin: 0 auto;
+    display: flex;
+    position: relative;
+}
+
+table {
+    margin: 0 auto;
+    position: absolute;
+    top: 50px;
+    left: 50px;
+}
+
+th {
+    padding: 50px;
+}
+
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid black;
+    margin: 0 auto;
+}
+
+
+
+/* footer */
+
+.footer {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    margin: 0 auto;
+    position: relative;
+    border: 1px solid rgb(87, 8, 8);
+    border-right: none;
+    border-left: none;
+    border-bottom: none;
+}
+
+
+
+.footer-logo {
+    font-size: 30px;
+    margin: 20px;    
+}
+
+.footer-logo p {  
+    border-bottom: 2px solid rgb(87, 8, 8);
+}
+
+.footer-item {
+    position: absolute;
+    top: 120px;
+    left: 30px;
+}
+
+.footer-right-item {
+    right: 120px;
+    position: absolute;
+    top: 120px;
+}
